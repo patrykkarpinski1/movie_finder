@@ -22,5 +22,5 @@ abstract class RegisterModule {
 
   @lazySingleton
   Dio dio(@Named('BaseUrl') String url, @Named('ApiKey') String apiKey) =>
-      Dio(BaseOptions(baseUrl: url, headers: {'api_key': apiKey}));
+      Dio(BaseOptions(baseUrl: url, queryParameters: {'api_key': apiKey}));
 }
