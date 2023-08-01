@@ -28,7 +28,7 @@ class PopularMovieWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      results[index].originalTitle,
+                      results[index].title,
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/models/popular_movie_model.dart';
+import 'package:movie_finder/models/top_rated_movie_model.dart';
 import 'package:movie_finder/repositories/movie_repositories.dart';
 
 part 'home_state.dart';
@@ -16,6 +17,23 @@ class HomeCubit extends Cubit<HomeState> {
       final popularMovie = await movieRepository.getPopularMovie();
       emit(
         state.copyWith(status: Status.success, popularMovie: popularMovie),
+      );
+    } catch (error) {
+      emit(
+        state.copyWith(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> getTopRatedMovie() async {
+    emit(HomeState(status: Status.loading));
+    try {
+      final topRatedMovie = await movieRepository.getTopRatedMovie();
+      emit(
+        state.copyWith(status: Status.success, topRatedMovie: topRatedMovie),
       );
     } catch (error) {
       emit(

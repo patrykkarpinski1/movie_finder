@@ -4,6 +4,8 @@ import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/app/injection_container.dart';
 import 'package:movie_finder/features/home/cubit/home_cubit.dart';
 import 'package:movie_finder/widgets/popular_movie_widget.dart';
+import 'package:movie_finder/widgets/top_rated_films_widget.dart';
+import 'package:movie_finder/widgets/tv_series_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,6 +35,7 @@ class HomePage extends StatelessWidget {
             );
           } else if (state.status == Status.initial) {
             context.read<HomeCubit>().getPopularMovie();
+            context.read<HomeCubit>().getTopRatedMovie();
             return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
@@ -40,6 +43,7 @@ class HomePage extends StatelessWidget {
             );
           }
           final popularMovieModels = state.popularMovie?.results ?? [];
+          final topRatedMovieModel = state.topRatedMovie?.results ?? [];
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.black,
@@ -64,6 +68,8 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 PopularMovieWidget(results: popularMovieModels),
+                TopRatedFilmsWidget(results: topRatedMovieModel),
+                TvSeriesWidget(),
               ],
             ),
           );

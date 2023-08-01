@@ -19,6 +19,7 @@ mixin _$HomeState {
   Status get status => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
   PopularMovieModel? get popularMovie => throw _privateConstructorUsedError;
+  TopRatedMovieModel? get topRatedMovie => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -31,9 +32,13 @@ abstract class $HomeStateCopyWith<$Res> {
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
   $Res call(
-      {Status status, String? errorMessage, PopularMovieModel? popularMovie});
+      {Status status,
+      String? errorMessage,
+      PopularMovieModel? popularMovie,
+      TopRatedMovieModel? topRatedMovie});
 
   $PopularMovieModelCopyWith<$Res>? get popularMovie;
+  $TopRatedMovieModelCopyWith<$Res>? get topRatedMovie;
 }
 
 /// @nodoc
@@ -52,6 +57,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? status = null,
     Object? errorMessage = freezed,
     Object? popularMovie = freezed,
+    Object? topRatedMovie = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -66,6 +72,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.popularMovie
           : popularMovie // ignore: cast_nullable_to_non_nullable
               as PopularMovieModel?,
+      topRatedMovie: freezed == topRatedMovie
+          ? _value.topRatedMovie
+          : topRatedMovie // ignore: cast_nullable_to_non_nullable
+              as TopRatedMovieModel?,
     ) as $Val);
   }
 
@@ -80,6 +90,18 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       return _then(_value.copyWith(popularMovie: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TopRatedMovieModelCopyWith<$Res>? get topRatedMovie {
+    if (_value.topRatedMovie == null) {
+      return null;
+    }
+
+    return $TopRatedMovieModelCopyWith<$Res>(_value.topRatedMovie!, (value) {
+      return _then(_value.copyWith(topRatedMovie: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -90,10 +112,15 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {Status status, String? errorMessage, PopularMovieModel? popularMovie});
+      {Status status,
+      String? errorMessage,
+      PopularMovieModel? popularMovie,
+      TopRatedMovieModel? topRatedMovie});
 
   @override
   $PopularMovieModelCopyWith<$Res>? get popularMovie;
+  @override
+  $TopRatedMovieModelCopyWith<$Res>? get topRatedMovie;
 }
 
 /// @nodoc
@@ -110,6 +137,7 @@ class __$$_HomeStateCopyWithImpl<$Res>
     Object? status = null,
     Object? errorMessage = freezed,
     Object? popularMovie = freezed,
+    Object? topRatedMovie = freezed,
   }) {
     return _then(_$_HomeState(
       status: null == status
@@ -124,6 +152,10 @@ class __$$_HomeStateCopyWithImpl<$Res>
           ? _value.popularMovie
           : popularMovie // ignore: cast_nullable_to_non_nullable
               as PopularMovieModel?,
+      topRatedMovie: freezed == topRatedMovie
+          ? _value.topRatedMovie
+          : topRatedMovie // ignore: cast_nullable_to_non_nullable
+              as TopRatedMovieModel?,
     ));
   }
 }
@@ -132,7 +164,10 @@ class __$$_HomeStateCopyWithImpl<$Res>
 
 class _$_HomeState implements _HomeState {
   _$_HomeState(
-      {this.status = Status.initial, this.errorMessage, this.popularMovie});
+      {this.status = Status.initial,
+      this.errorMessage,
+      this.popularMovie,
+      this.topRatedMovie});
 
   @override
   @JsonKey()
@@ -141,10 +176,12 @@ class _$_HomeState implements _HomeState {
   final String? errorMessage;
   @override
   final PopularMovieModel? popularMovie;
+  @override
+  final TopRatedMovieModel? topRatedMovie;
 
   @override
   String toString() {
-    return 'HomeState(status: $status, errorMessage: $errorMessage, popularMovie: $popularMovie)';
+    return 'HomeState(status: $status, errorMessage: $errorMessage, popularMovie: $popularMovie, topRatedMovie: $topRatedMovie)';
   }
 
   @override
@@ -156,12 +193,14 @@ class _$_HomeState implements _HomeState {
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             (identical(other.popularMovie, popularMovie) ||
-                other.popularMovie == popularMovie));
+                other.popularMovie == popularMovie) &&
+            (identical(other.topRatedMovie, topRatedMovie) ||
+                other.topRatedMovie == topRatedMovie));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, errorMessage, popularMovie);
+  int get hashCode => Object.hash(
+      runtimeType, status, errorMessage, popularMovie, topRatedMovie);
 
   @JsonKey(ignore: true)
   @override
@@ -174,7 +213,8 @@ abstract class _HomeState implements HomeState {
   factory _HomeState(
       {final Status status,
       final String? errorMessage,
-      final PopularMovieModel? popularMovie}) = _$_HomeState;
+      final PopularMovieModel? popularMovie,
+      final TopRatedMovieModel? topRatedMovie}) = _$_HomeState;
 
   @override
   Status get status;
@@ -182,6 +222,8 @@ abstract class _HomeState implements HomeState {
   String? get errorMessage;
   @override
   PopularMovieModel? get popularMovie;
+  @override
+  TopRatedMovieModel? get topRatedMovie;
   @override
   @JsonKey(ignore: true)
   _$$_HomeStateCopyWith<_$_HomeState> get copyWith =>

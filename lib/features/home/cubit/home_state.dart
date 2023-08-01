@@ -6,5 +6,6 @@ class HomeState with _$HomeState {
     @Default(Status.initial) Status status,
     String? errorMessage,
     PopularMovieModel? popularMovie,
+    TopRatedMovieModel? topRatedMovie,
   }) = _HomeState;
 }
