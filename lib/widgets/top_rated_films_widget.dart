@@ -43,16 +43,29 @@ class TopRatedFilmsWidget extends StatelessWidget {
                                     width: 130,
                                     child: Text(
                                       softWrap: true,
-                                      results[index].title,
+                                      results[index].title ?? 'download error',
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  Image.network(
-                                    'https://www.themoviedb.org/t/p/w220_and_h330_face${results[index].backdropPath}',
-                                    fit: BoxFit.cover,
+                                  SizedBox(
                                     height: 200,
+                                    child: results[index].backdropPath != null
+                                        ? FadeInImage(
+                                            width: 130,
+                                            placeholder: const AssetImage(
+                                                'images/load.png'),
+                                            image: NetworkImage(
+                                                'https://www.themoviedb.org/t/p/w220_and_h330_face${results[index].backdropPath}'),
+                                            fit: BoxFit.cover,
+                                          )
+                                        : const Image(
+                                            image:
+                                                AssetImage('images/film.png'),
+                                            width: 130,
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
                                   Row(
                                     children: [
@@ -99,7 +112,8 @@ class TopRatedFilmsWidget extends StatelessWidget {
                                     height: 200,
                                     width: 170,
                                     child: Text(
-                                      results[index].overview,
+                                      results[index].overview ??
+                                          'download error',
                                       overflow: TextOverflow.ellipsis,
                                       softWrap: true,
                                       maxLines: 30,

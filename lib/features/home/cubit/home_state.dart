@@ -7,5 +7,7 @@ class HomeState with _$HomeState {
     String? errorMessage,
     PopularMovieModel? popularMovie,
     TopRatedMovieModel? topRatedMovie,
+    TvSeriesModel? topRatedTvSeries,
+    TvSeriesModel? popularTvSeries,
   }) = _HomeState;
 }

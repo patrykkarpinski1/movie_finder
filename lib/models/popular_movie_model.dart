@@ -16,10 +16,10 @@ class PopularMovieModel with _$PopularMovieModel {
 @freezed
 class Results with _$Results {
   factory Results({
-    required String backdropPath,
-    required String title,
-    required String releaseDate,
-    required double voteAverage,
+    String? backdropPath,
+    String? title,
+    String? releaseDate,
+    double? voteAverage,
     required int id,
   }) = _Results;
 

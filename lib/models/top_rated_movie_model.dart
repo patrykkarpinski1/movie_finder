@@ -16,12 +16,12 @@ class TopRatedMovieModel with _$TopRatedMovieModel {
 @freezed
 class Results with _$Results {
   factory Results({
-    required String backdropPath,
-    required String title,
-    required double voteAverage,
+    String? backdropPath,
+    String? title,
+    double? voteAverage,
     required int id,
-    required String overview,
-    required int voteCount,
+    String? overview,
+    int? voteCount,
   }) = _Results;
 
   factory Results.fromJson(Map<String, dynamic> json) =>

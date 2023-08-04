@@ -36,14 +36,18 @@ class HomePage extends StatelessWidget {
           } else if (state.status == Status.initial) {
             context.read<HomeCubit>().getPopularMovie();
             context.read<HomeCubit>().getTopRatedMovie();
+            context.read<HomeCubit>().getPopularTvSeries();
+            context.read<HomeCubit>().getTopRatedTvSeries();
             return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
             );
           }
-          final popularMovieModels = state.popularMovie?.results ?? [];
+          final popularMovieModel = state.popularMovie?.results ?? [];
           final topRatedMovieModel = state.topRatedMovie?.results ?? [];
+          final popularTvSeries = state.popularTvSeries?.results ?? [];
+          final topRatedTvSeries = state.topRatedTvSeries?.results ?? [];
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.black,
@@ -57,7 +61,7 @@ class HomePage extends StatelessWidget {
             body: ListView(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
                   color: Colors.black,
                   child: const Center(
                     child: Text(
@@ -67,9 +71,12 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                PopularMovieWidget(results: popularMovieModels),
+                PopularMovieWidget(results: popularMovieModel),
                 TopRatedFilmsWidget(results: topRatedMovieModel),
-                TvSeriesWidget(),
+                TvSeriesWidget(
+                  topRatedResults: topRatedTvSeries,
+                  popularResults: popularTvSeries,
+                ),
               ],
             ),
           );

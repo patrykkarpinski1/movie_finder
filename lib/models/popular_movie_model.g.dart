@@ -22,10 +22,10 @@ Map<String, dynamic> _$$_PopularMovieModelToJson(
     };
 
 _$_Results _$$_ResultsFromJson(Map<String, dynamic> json) => _$_Results(
-      backdropPath: json['backdrop_path'] as String,
-      title: json['title'] as String,
-      releaseDate: json['release_date'] as String,
-      voteAverage: (json['vote_average'] as num).toDouble(),
+      backdropPath: json['backdrop_path'] as String?,
+      title: json['title'] as String?,
+      releaseDate: json['release_date'] as String?,
+      voteAverage: (json['vote_average'] as num?)?.toDouble(),
       id: json['id'] as int,
     );
 

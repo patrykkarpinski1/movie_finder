@@ -183,10 +183,10 @@ Results _$ResultsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Results {
-  String get backdropPath => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  String get releaseDate => throw _privateConstructorUsedError;
-  double get voteAverage => throw _privateConstructorUsedError;
+  String? get backdropPath => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get releaseDate => throw _privateConstructorUsedError;
+  double? get voteAverage => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -200,10 +200,10 @@ abstract class $ResultsCopyWith<$Res> {
       _$ResultsCopyWithImpl<$Res, Results>;
   @useResult
   $Res call(
-      {String backdropPath,
-      String title,
-      String releaseDate,
-      double voteAverage,
+      {String? backdropPath,
+      String? title,
+      String? releaseDate,
+      double? voteAverage,
       int id});
 }
 
@@ -220,29 +220,29 @@ class _$ResultsCopyWithImpl<$Res, $Val extends Results>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? backdropPath = null,
-    Object? title = null,
-    Object? releaseDate = null,
-    Object? voteAverage = null,
+    Object? backdropPath = freezed,
+    Object? title = freezed,
+    Object? releaseDate = freezed,
+    Object? voteAverage = freezed,
     Object? id = null,
   }) {
     return _then(_value.copyWith(
-      backdropPath: null == backdropPath
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
+              as String?,
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      releaseDate: null == releaseDate
+              as String?,
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      voteAverage: null == voteAverage
+              as String?,
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -259,10 +259,10 @@ abstract class _$$_ResultsCopyWith<$Res> implements $ResultsCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String backdropPath,
-      String title,
-      String releaseDate,
-      double voteAverage,
+      {String? backdropPath,
+      String? title,
+      String? releaseDate,
+      double? voteAverage,
       int id});
 }
 
@@ -276,29 +276,29 @@ class __$$_ResultsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? backdropPath = null,
-    Object? title = null,
-    Object? releaseDate = null,
-    Object? voteAverage = null,
+    Object? backdropPath = freezed,
+    Object? title = freezed,
+    Object? releaseDate = freezed,
+    Object? voteAverage = freezed,
     Object? id = null,
   }) {
     return _then(_$_Results(
-      backdropPath: null == backdropPath
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
+              as String?,
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      releaseDate: null == releaseDate
+              as String?,
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      voteAverage: null == voteAverage
+              as String?,
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -311,23 +311,23 @@ class __$$_ResultsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Results implements _Results {
   _$_Results(
-      {required this.backdropPath,
-      required this.title,
-      required this.releaseDate,
-      required this.voteAverage,
+      {this.backdropPath,
+      this.title,
+      this.releaseDate,
+      this.voteAverage,
       required this.id});
 
   factory _$_Results.fromJson(Map<String, dynamic> json) =>
       _$$_ResultsFromJson(json);
 
   @override
-  final String backdropPath;
+  final String? backdropPath;
   @override
-  final String title;
+  final String? title;
   @override
-  final String releaseDate;
+  final String? releaseDate;
   @override
-  final double voteAverage;
+  final double? voteAverage;
   @override
   final int id;
 
@@ -372,22 +372,22 @@ class _$_Results implements _Results {
 
 abstract class _Results implements Results {
   factory _Results(
-      {required final String backdropPath,
-      required final String title,
-      required final String releaseDate,
-      required final double voteAverage,
+      {final String? backdropPath,
+      final String? title,
+      final String? releaseDate,
+      final double? voteAverage,
       required final int id}) = _$_Results;
 
   factory _Results.fromJson(Map<String, dynamic> json) = _$_Results.fromJson;
 
   @override
-  String get backdropPath;
+  String? get backdropPath;
   @override
-  String get title;
+  String? get title;
   @override
-  String get releaseDate;
+  String? get releaseDate;
   @override
-  double get voteAverage;
+  double? get voteAverage;
   @override
   int get id;
   @override

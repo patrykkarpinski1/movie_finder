@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'top_rated_movie_model.dart';
+part of 'tv_series_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-TopRatedMovieModel _$TopRatedMovieModelFromJson(Map<String, dynamic> json) {
-  return _TopRatedMovieModel.fromJson(json);
+TvSeriesModel _$TvSeriesModelFromJson(Map<String, dynamic> json) {
+  return _TvSeriesModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$TopRatedMovieModel {
+mixin _$TvSeriesModel {
   int get page => throw _privateConstructorUsedError;
   List<Results> get results => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TopRatedMovieModelCopyWith<TopRatedMovieModel> get copyWith =>
+  $TvSeriesModelCopyWith<TvSeriesModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TopRatedMovieModelCopyWith<$Res> {
-  factory $TopRatedMovieModelCopyWith(
-          TopRatedMovieModel value, $Res Function(TopRatedMovieModel) then) =
-      _$TopRatedMovieModelCopyWithImpl<$Res, TopRatedMovieModel>;
+abstract class $TvSeriesModelCopyWith<$Res> {
+  factory $TvSeriesModelCopyWith(
+          TvSeriesModel value, $Res Function(TvSeriesModel) then) =
+      _$TvSeriesModelCopyWithImpl<$Res, TvSeriesModel>;
   @useResult
   $Res call({int page, List<Results> results});
 }
 
 /// @nodoc
-class _$TopRatedMovieModelCopyWithImpl<$Res, $Val extends TopRatedMovieModel>
-    implements $TopRatedMovieModelCopyWith<$Res> {
-  _$TopRatedMovieModelCopyWithImpl(this._value, this._then);
+class _$TvSeriesModelCopyWithImpl<$Res, $Val extends TvSeriesModel>
+    implements $TvSeriesModelCopyWith<$Res> {
+  _$TvSeriesModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -68,22 +68,22 @@ class _$TopRatedMovieModelCopyWithImpl<$Res, $Val extends TopRatedMovieModel>
 }
 
 /// @nodoc
-abstract class _$$_TopRatedMovieModelCopyWith<$Res>
-    implements $TopRatedMovieModelCopyWith<$Res> {
-  factory _$$_TopRatedMovieModelCopyWith(_$_TopRatedMovieModel value,
-          $Res Function(_$_TopRatedMovieModel) then) =
-      __$$_TopRatedMovieModelCopyWithImpl<$Res>;
+abstract class _$$_TvSeriesModelCopyWith<$Res>
+    implements $TvSeriesModelCopyWith<$Res> {
+  factory _$$_TvSeriesModelCopyWith(
+          _$_TvSeriesModel value, $Res Function(_$_TvSeriesModel) then) =
+      __$$_TvSeriesModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int page, List<Results> results});
 }
 
 /// @nodoc
-class __$$_TopRatedMovieModelCopyWithImpl<$Res>
-    extends _$TopRatedMovieModelCopyWithImpl<$Res, _$_TopRatedMovieModel>
-    implements _$$_TopRatedMovieModelCopyWith<$Res> {
-  __$$_TopRatedMovieModelCopyWithImpl(
-      _$_TopRatedMovieModel _value, $Res Function(_$_TopRatedMovieModel) _then)
+class __$$_TvSeriesModelCopyWithImpl<$Res>
+    extends _$TvSeriesModelCopyWithImpl<$Res, _$_TvSeriesModel>
+    implements _$$_TvSeriesModelCopyWith<$Res> {
+  __$$_TvSeriesModelCopyWithImpl(
+      _$_TvSeriesModel _value, $Res Function(_$_TvSeriesModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_TopRatedMovieModelCopyWithImpl<$Res>
     Object? page = null,
     Object? results = null,
   }) {
-    return _then(_$_TopRatedMovieModel(
+    return _then(_$_TvSeriesModel(
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -107,13 +107,12 @@ class __$$_TopRatedMovieModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TopRatedMovieModel implements _TopRatedMovieModel {
-  _$_TopRatedMovieModel(
-      {required this.page, required final List<Results> results})
+class _$_TvSeriesModel implements _TvSeriesModel {
+  _$_TvSeriesModel({required this.page, required final List<Results> results})
       : _results = results;
 
-  factory _$_TopRatedMovieModel.fromJson(Map<String, dynamic> json) =>
-      _$$_TopRatedMovieModelFromJson(json);
+  factory _$_TvSeriesModel.fromJson(Map<String, dynamic> json) =>
+      _$$_TvSeriesModelFromJson(json);
 
   @override
   final int page;
@@ -127,14 +126,14 @@ class _$_TopRatedMovieModel implements _TopRatedMovieModel {
 
   @override
   String toString() {
-    return 'TopRatedMovieModel(page: $page, results: $results)';
+    return 'TvSeriesModel(page: $page, results: $results)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TopRatedMovieModel &&
+            other is _$_TvSeriesModel &&
             (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other._results, _results));
   }
@@ -147,25 +146,24 @@ class _$_TopRatedMovieModel implements _TopRatedMovieModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TopRatedMovieModelCopyWith<_$_TopRatedMovieModel> get copyWith =>
-      __$$_TopRatedMovieModelCopyWithImpl<_$_TopRatedMovieModel>(
-          this, _$identity);
+  _$$_TvSeriesModelCopyWith<_$_TvSeriesModel> get copyWith =>
+      __$$_TvSeriesModelCopyWithImpl<_$_TvSeriesModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TopRatedMovieModelToJson(
+    return _$$_TvSeriesModelToJson(
       this,
     );
   }
 }
 
-abstract class _TopRatedMovieModel implements TopRatedMovieModel {
-  factory _TopRatedMovieModel(
+abstract class _TvSeriesModel implements TvSeriesModel {
+  factory _TvSeriesModel(
       {required final int page,
-      required final List<Results> results}) = _$_TopRatedMovieModel;
+      required final List<Results> results}) = _$_TvSeriesModel;
 
-  factory _TopRatedMovieModel.fromJson(Map<String, dynamic> json) =
-      _$_TopRatedMovieModel.fromJson;
+  factory _TvSeriesModel.fromJson(Map<String, dynamic> json) =
+      _$_TvSeriesModel.fromJson;
 
   @override
   int get page;
@@ -173,7 +171,7 @@ abstract class _TopRatedMovieModel implements TopRatedMovieModel {
   List<Results> get results;
   @override
   @JsonKey(ignore: true)
-  _$$_TopRatedMovieModelCopyWith<_$_TopRatedMovieModel> get copyWith =>
+  _$$_TvSeriesModelCopyWith<_$_TvSeriesModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -184,11 +182,8 @@ Results _$ResultsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Results {
   String? get backdropPath => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  double? get voteAverage => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
-  String? get overview => throw _privateConstructorUsedError;
-  int? get voteCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -200,13 +195,7 @@ abstract class $ResultsCopyWith<$Res> {
   factory $ResultsCopyWith(Results value, $Res Function(Results) then) =
       _$ResultsCopyWithImpl<$Res, Results>;
   @useResult
-  $Res call(
-      {String? backdropPath,
-      String? title,
-      double? voteAverage,
-      int id,
-      String? overview,
-      int? voteCount});
+  $Res call({String? backdropPath, String? name, int id});
 }
 
 /// @nodoc
@@ -223,37 +212,22 @@ class _$ResultsCopyWithImpl<$Res, $Val extends Results>
   @override
   $Res call({
     Object? backdropPath = freezed,
-    Object? title = freezed,
-    Object? voteAverage = freezed,
+    Object? name = freezed,
     Object? id = null,
-    Object? overview = freezed,
-    Object? voteCount = freezed,
   }) {
     return _then(_value.copyWith(
       backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      voteAverage: freezed == voteAverage
-          ? _value.voteAverage
-          : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      overview: freezed == overview
-          ? _value.overview
-          : overview // ignore: cast_nullable_to_non_nullable
-              as String?,
-      voteCount: freezed == voteCount
-          ? _value.voteCount
-          : voteCount // ignore: cast_nullable_to_non_nullable
-              as int?,
     ) as $Val);
   }
 }
@@ -265,13 +239,7 @@ abstract class _$$_ResultsCopyWith<$Res> implements $ResultsCopyWith<$Res> {
       __$$_ResultsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? backdropPath,
-      String? title,
-      double? voteAverage,
-      int id,
-      String? overview,
-      int? voteCount});
+  $Res call({String? backdropPath, String? name, int id});
 }
 
 /// @nodoc
@@ -285,37 +253,22 @@ class __$$_ResultsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? backdropPath = freezed,
-    Object? title = freezed,
-    Object? voteAverage = freezed,
+    Object? name = freezed,
     Object? id = null,
-    Object? overview = freezed,
-    Object? voteCount = freezed,
   }) {
     return _then(_$_Results(
       backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      voteAverage: freezed == voteAverage
-          ? _value.voteAverage
-          : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      overview: freezed == overview
-          ? _value.overview
-          : overview // ignore: cast_nullable_to_non_nullable
-              as String?,
-      voteCount: freezed == voteCount
-          ? _value.voteCount
-          : voteCount // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -323,13 +276,7 @@ class __$$_ResultsCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Results implements _Results {
-  _$_Results(
-      {this.backdropPath,
-      this.title,
-      this.voteAverage,
-      required this.id,
-      this.overview,
-      this.voteCount});
+  _$_Results({this.backdropPath, this.name, required this.id});
 
   factory _$_Results.fromJson(Map<String, dynamic> json) =>
       _$$_ResultsFromJson(json);
@@ -337,19 +284,13 @@ class _$_Results implements _Results {
   @override
   final String? backdropPath;
   @override
-  final String? title;
-  @override
-  final double? voteAverage;
+  final String? name;
   @override
   final int id;
-  @override
-  final String? overview;
-  @override
-  final int? voteCount;
 
   @override
   String toString() {
-    return 'Results(backdropPath: $backdropPath, title: $title, voteAverage: $voteAverage, id: $id, overview: $overview, voteCount: $voteCount)';
+    return 'Results(backdropPath: $backdropPath, name: $name, id: $id)';
   }
 
   @override
@@ -359,20 +300,13 @@ class _$_Results implements _Results {
             other is _$_Results &&
             (identical(other.backdropPath, backdropPath) ||
                 other.backdropPath == backdropPath) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.voteAverage, voteAverage) ||
-                other.voteAverage == voteAverage) &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.overview, overview) ||
-                other.overview == overview) &&
-            (identical(other.voteCount, voteCount) ||
-                other.voteCount == voteCount));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, backdropPath, title, voteAverage, id, overview, voteCount);
+  int get hashCode => Object.hash(runtimeType, backdropPath, name, id);
 
   @JsonKey(ignore: true)
   @override
@@ -391,26 +325,17 @@ class _$_Results implements _Results {
 abstract class _Results implements Results {
   factory _Results(
       {final String? backdropPath,
-      final String? title,
-      final double? voteAverage,
-      required final int id,
-      final String? overview,
-      final int? voteCount}) = _$_Results;
+      final String? name,
+      required final int id}) = _$_Results;
 
   factory _Results.fromJson(Map<String, dynamic> json) = _$_Results.fromJson;
 
   @override
   String? get backdropPath;
   @override
-  String? get title;
-  @override
-  double? get voteAverage;
+  String? get name;
   @override
   int get id;
-  @override
-  String? get overview;
-  @override
-  int? get voteCount;
   @override
   @JsonKey(ignore: true)
   _$$_ResultsCopyWith<_$_Results> get copyWith =>
