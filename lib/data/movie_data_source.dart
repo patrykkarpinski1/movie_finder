@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_finder/models/popular_movie_model.dart';
+import 'package:movie_finder/models/search_model.dart';
 import 'package:movie_finder/models/top_rated_movie_model.dart';
 import 'package:movie_finder/models/tv_series_model.dart';
 import 'package:retrofit/retrofit.dart';
@@ -22,4 +23,8 @@ abstract class MovieRemoteRetrofitDataSource {
   Future<TvSeriesModel> getTopRatedTvSeries();
   @GET('tv/popular')
   Future<TvSeriesModel> getPopularTvSeries();
+  @GET('search/tv')
+  Future<SearchModel> searchTvSeries(@Query('query') String query);
+  @GET('search/movie')
+  Future<SearchModel> searchMovie(@Query('query') String query);
 }

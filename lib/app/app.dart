@@ -10,6 +10,8 @@ class MyApp extends StatelessWidget {
       title: 'Movie Finder',
       theme: ThemeData(
         brightness: Brightness.dark,
+        primaryColor: Colors.black,
+        scaffoldBackgroundColor: Colors.black,
       ),
       home: const HomePage(),
     );

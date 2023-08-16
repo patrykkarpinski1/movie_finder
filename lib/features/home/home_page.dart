@@ -1,87 +1,121 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/app/injection_container.dart';
 import 'package:movie_finder/features/home/cubit/home_cubit.dart';
 import 'package:movie_finder/widgets/popular_movie_widget.dart';
+import 'package:movie_finder/widgets/search_widget/cubit/search_cubit.dart';
+import 'package:movie_finder/widgets/search_widget/search_widget.dart';
 import 'package:movie_finder/widgets/top_rated_films_widget.dart';
 import 'package:movie_finder/widgets/tv_series_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation<double> animation;
+  late Animation<Offset> slideAnimation;
+  bool isSearchVisible = false;
+  @override
+  void initState() {
+    super.initState();
+
+    animationController = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    )..value = 0.0;
+
+    animationController.addStatusListener((status) {
+      if (status == AnimationStatus.dismissed) {
+        setState(() {
+          isSearchVisible = false;
+        });
+      }
+    });
+
+    animation =
+        Tween<double>(begin: 0.0, end: 1.0).animate(animationController);
+    slideAnimation = Tween<Offset>(
+      begin: const Offset(-1.0, 0.0),
+      end: const Offset(0.0, 0.0),
+    ).animate(animationController);
+  }
+
+  void toggleSearch() {
+    if (animationController.status == AnimationStatus.completed) {
+      animationController.reverse();
+    } else if (animationController.status == AnimationStatus.dismissed) {
+      setState(() {
+        isSearchVisible = true;
+      });
+      animationController.forward();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider<HomeCubit>(
-      create: (context) => getIt<HomeCubit>(),
-      child: BlocConsumer<HomeCubit, HomeState>(
-        listener: (context, state) {
-          if (state.status == Status.error) {
-            final errorMessage = state.errorMessage ?? 'Unknown error';
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(errorMessage),
-                backgroundColor: Colors.red,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<HomeCubit>(
+          create: (context) => getIt<HomeCubit>(),
+        ),
+        BlocProvider<SearchCubit>(
+          create: (context) => getIt<SearchCubit>(),
+        )
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Image(
+                image: AssetImage('images/video.png'),
               ),
-            );
-          }
-        },
-        builder: (context, state) {
-          if (state.status == Status.loading) {
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else if (state.status == Status.initial) {
-            context.read<HomeCubit>().getPopularMovie();
-            context.read<HomeCubit>().getTopRatedMovie();
-            context.read<HomeCubit>().getPopularTvSeries();
-            context.read<HomeCubit>().getTopRatedTvSeries();
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-          final popularMovieModel = state.popularMovie?.results ?? [];
-          final topRatedMovieModel = state.topRatedMovie?.results ?? [];
-          final popularTvSeries = state.popularTvSeries?.results ?? [];
-          final topRatedTvSeries = state.topRatedTvSeries?.results ?? [];
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.black,
-              title: Row(
-                children: const [
-                  Image(image: AssetImage('images/video.png')),
-                  Text(' MOVIE FINDER'),
-                ],
+              const Text(' MOVIE FINDER'),
+              IconButton(
+                  onPressed: toggleSearch, icon: const Icon(Icons.search))
+            ],
+          ),
+        ),
+        body: ListView(
+          children: [
+            SlideTransition(
+              position: slideAnimation,
+              child: isSearchVisible
+                  ? SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: const SearchWidget(),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+              color: Colors.black,
+              child: const Center(
+                child: Text(
+                  'POPULAR FILMS',
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-            body: ListView(
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
-                  color: Colors.black,
-                  child: const Center(
-                    child: Text(
-                      'POPULAR FILMS',
-                      style:
-                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                PopularMovieWidget(results: popularMovieModel),
-                TopRatedFilmsWidget(results: topRatedMovieModel),
-                TvSeriesWidget(
-                  topRatedResults: topRatedTvSeries,
-                  popularResults: popularTvSeries,
-                ),
-              ],
-            ),
-          );
-        },
+            const PopularMovieWidget(),
+            const TopRatedFilmsWidget(),
+            const TvSeriesWidget(),
+          ],
+        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 }
