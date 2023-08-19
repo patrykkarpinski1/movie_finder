@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage>
         ),
         BlocProvider<SearchCubit>(
           create: (context) => getIt<SearchCubit>(),
-        )
+        ),
       ],
       child: Scaffold(
         appBar: AppBar(

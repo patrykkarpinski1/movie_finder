@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/core/enums.dart';
+import 'package:movie_finder/features/details/details_film_page.dart';
 import 'package:movie_finder/features/home/cubit/home_cubit.dart';
 import 'package:movie_finder/widgets/rating_circle_widget.dart';
 
@@ -70,25 +71,35 @@ class PopularMovieWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       bottom: 15, right: 10),
-                                  child: ClipRRect(
-                                    child: Container(
-                                      constraints: const BoxConstraints(
-                                        maxHeight: 140,
-                                        maxWidth: 260,
-                                      ),
-                                      child: results[index].backdropPath != null
-                                          ? FadeInImage(
-                                              placeholder: const AssetImage(
-                                                  'images/reload.png'),
-                                              image: NetworkImage(
-                                                'https://image.tmdb.org/t/p/w500${results[index].backdropPath}',
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                              builder: (_) => DetailsFilmPage(
+                                                    id: results[index].id,
+                                                  )));
+                                    },
+                                    child: ClipRRect(
+                                      child: Container(
+                                        constraints: const BoxConstraints(
+                                          maxHeight: 140,
+                                          maxWidth: 260,
+                                        ),
+                                        child: results[index].backdropPath !=
+                                                null
+                                            ? FadeInImage(
+                                                placeholder: const AssetImage(
+                                                    'images/reload.png'),
+                                                image: NetworkImage(
+                                                  'https://image.tmdb.org/t/p/w500${results[index].backdropPath}',
+                                                ),
+                                              )
+                                            : const Image(
+                                                image: AssetImage(
+                                                    'images/film.png'),
+                                                fit: BoxFit.cover,
                                               ),
-                                            )
-                                          : const Image(
-                                              image:
-                                                  AssetImage('images/film.png'),
-                                              fit: BoxFit.cover,
-                                            ),
+                                      ),
                                     ),
                                   ),
                                 ),

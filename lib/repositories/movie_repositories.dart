@@ -1,4 +1,5 @@
 import 'package:movie_finder/data/movie_data_source.dart';
+import 'package:movie_finder/models/details_film_model.dart';
 import 'package:movie_finder/models/popular_movie_model.dart';
 import 'package:movie_finder/models/search_model.dart';
 import 'package:movie_finder/models/top_rated_movie_model.dart';
@@ -29,5 +30,9 @@ class MovieRepository {
 
   Future<SearchModel?> searchMovie({required String query}) async {
     return movieDataSource.searchMovie(query);
+  }
+
+  Future<DetailsFilmModel?> getDetailsFilm({required int movieId}) async {
+    return movieDataSource.getDetailsFilm(movieId);
   }
 }
