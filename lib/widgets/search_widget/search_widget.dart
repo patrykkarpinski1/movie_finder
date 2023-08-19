@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/core/enums.dart';
-import 'package:movie_finder/models/search_model.dart';
+import 'package:movie_finder/models/search/search_model.dart';
 import 'package:movie_finder/widgets/search_widget/cubit/search_cubit.dart';
 
 class SearchWidget extends StatefulWidget {

@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_finder/models/details_film_model.dart';
-import 'package:movie_finder/models/popular_movie_model.dart';
-import 'package:movie_finder/models/search_model.dart';
-import 'package:movie_finder/models/top_rated_movie_model.dart';
-import 'package:movie_finder/models/tv_series_model.dart';
+import 'package:movie_finder/models/details/details_film_model.dart';
+import 'package:movie_finder/models/movie/movie_model.dart';
+import 'package:movie_finder/models/search/search_model.dart';
+import 'package:movie_finder/models/series/tv_series_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'movie_data_source.g.dart';
@@ -17,9 +16,9 @@ abstract class MovieRemoteRetrofitDataSource {
       _MovieRemoteRetrofitDataSource;
 
   @GET('movie/popular')
-  Future<PopularMovieModel> getPopularMovie();
+  Future<MovieModel> getPopularMovie();
   @GET('movie/top_rated')
-  Future<TopRatedMovieModel> getTopRatedMovie();
+  Future<MovieModel> getTopRatedMovie();
   @GET('tv/top_rated')
   Future<TvSeriesModel> getTopRatedTvSeries();
   @GET('tv/popular')
@@ -28,8 +27,6 @@ abstract class MovieRemoteRetrofitDataSource {
   Future<SearchModel> searchTvSeries(@Query('query') String query);
   @GET('search/movie')
   Future<SearchModel> searchMovie(@Query('query') String query);
-  // @GET('movie/{movie_id}')
-  // Future<DetailsFilmModel> getDetailsFilm({required int movieId});
   @GET('movie/{movie_id}')
   Future<DetailsFilmModel> getDetailsFilm(@Path('movie_id') int movieId);
 }

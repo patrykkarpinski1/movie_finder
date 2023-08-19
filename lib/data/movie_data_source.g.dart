@@ -19,13 +19,13 @@ class _MovieRemoteRetrofitDataSource implements MovieRemoteRetrofitDataSource {
   String? baseUrl;
 
   @override
-  Future<PopularMovieModel> getPopularMovie() async {
+  Future<MovieModel> getPopularMovie() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<PopularMovieModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<MovieModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -37,18 +37,18 @@ class _MovieRemoteRetrofitDataSource implements MovieRemoteRetrofitDataSource {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PopularMovieModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<TopRatedMovieModel> getTopRatedMovie() async {
+  Future<MovieModel> getTopRatedMovie() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<TopRatedMovieModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<MovieModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -60,7 +60,7 @@ class _MovieRemoteRetrofitDataSource implements MovieRemoteRetrofitDataSource {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = TopRatedMovieModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     return value;
   }
 

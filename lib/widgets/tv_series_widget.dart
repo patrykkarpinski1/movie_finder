@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/features/home/cubit/home_cubit.dart';
-import 'package:movie_finder/models/tv_series_model.dart';
+import 'package:movie_finder/models/series/tv_series_model.dart';
 
 class TvSeriesWidget extends StatefulWidget {
   const TvSeriesWidget({super.key});

@@ -1,18 +1,17 @@
 import 'package:movie_finder/data/movie_data_source.dart';
-import 'package:movie_finder/models/details_film_model.dart';
-import 'package:movie_finder/models/popular_movie_model.dart';
-import 'package:movie_finder/models/search_model.dart';
-import 'package:movie_finder/models/top_rated_movie_model.dart';
-import 'package:movie_finder/models/tv_series_model.dart';
+import 'package:movie_finder/models/details/details_film_model.dart';
+import 'package:movie_finder/models/movie/movie_model.dart';
+import 'package:movie_finder/models/search/search_model.dart';
+import 'package:movie_finder/models/series/tv_series_model.dart';
 
 class MovieRepository {
   MovieRepository(this.movieDataSource);
   final MovieRemoteRetrofitDataSource movieDataSource;
-  Future<PopularMovieModel?> getPopularMovie() async {
+  Future<MovieModel?> getPopularMovie() async {
     return movieDataSource.getPopularMovie();
   }
 
-  Future<TopRatedMovieModel?> getTopRatedMovie() async {
+  Future<MovieModel?> getTopRatedMovie() async {
     return movieDataSource.getTopRatedMovie();
   }
 

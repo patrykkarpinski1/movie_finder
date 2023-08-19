@@ -1,16 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'popular_movie_model.freezed.dart';
-part 'popular_movie_model.g.dart';
+part 'movie_model.freezed.dart';
+part 'movie_model.g.dart';
 
 @freezed
-class PopularMovieModel with _$PopularMovieModel {
-  factory PopularMovieModel({
+class MovieModel with _$MovieModel {
+  factory MovieModel({
     required int page,
     required List<Results> results,
-  }) = _PopularMovieModel;
+  }) = _MovieModel;
 
-  factory PopularMovieModel.fromJson(Map<String, dynamic> json) =>
-      _$PopularMovieModelFromJson(json);
+  factory MovieModel.fromJson(Map<String, dynamic> json) =>
+      _$MovieModelFromJson(json);
 }
 
 @freezed
@@ -21,6 +21,8 @@ class Results with _$Results {
     String? releaseDate,
     double? voteAverage,
     required int id,
+    String? overview,
+    int? voteCount,
   }) = _Results;
 
   factory Results.fromJson(Map<String, dynamic> json) =>

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/app/injection_container.dart';
 import 'package:movie_finder/features/details/cubit/details_cubit.dart';
-import 'package:movie_finder/models/details_film_model.dart';
+import 'package:movie_finder/models/details/details_film_model.dart';
 
 class DetailsFilmPage extends StatelessWidget {
   const DetailsFilmPage({required this.id, this.filmModel, super.key});
@@ -67,7 +67,7 @@ class DetailsFilmPage extends StatelessWidget {
                 child: ListView(children: [
                   Text(
                     filmModel.originalTitle ?? '',
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                   ),
                 ]),
               );

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:movie_finder/models/search_model.dart';
+import 'package:movie_finder/models/search/search_model.dart';
 import 'package:movie_finder/repositories/movie_repositories.dart';
 
 import '../../../app/core/enums.dart';
