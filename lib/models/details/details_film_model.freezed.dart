@@ -20,9 +20,15 @@ DetailsFilmModel _$DetailsFilmModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DetailsFilmModel {
-  String? get backdropPath => throw _privateConstructorUsedError;
-  String? get originalTitle => throw _privateConstructorUsedError;
+  String? get posterPath => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  String? get overview => throw _privateConstructorUsedError;
+  int? get voteCount => throw _privateConstructorUsedError;
+  double? get voteAverage => throw _privateConstructorUsedError;
+  int? get runtime => throw _privateConstructorUsedError;
+  String? get releaseDate => throw _privateConstructorUsedError;
+  List<Genres> get genres => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +42,16 @@ abstract class $DetailsFilmModelCopyWith<$Res> {
           DetailsFilmModel value, $Res Function(DetailsFilmModel) then) =
       _$DetailsFilmModelCopyWithImpl<$Res, DetailsFilmModel>;
   @useResult
-  $Res call({String? backdropPath, String? originalTitle, int id});
+  $Res call(
+      {String? posterPath,
+      String? title,
+      int id,
+      String? overview,
+      int? voteCount,
+      double? voteAverage,
+      int? runtime,
+      String? releaseDate,
+      List<Genres> genres});
 }
 
 /// @nodoc
@@ -52,23 +67,53 @@ class _$DetailsFilmModelCopyWithImpl<$Res, $Val extends DetailsFilmModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? backdropPath = freezed,
-    Object? originalTitle = freezed,
+    Object? posterPath = freezed,
+    Object? title = freezed,
     Object? id = null,
+    Object? overview = freezed,
+    Object? voteCount = freezed,
+    Object? voteAverage = freezed,
+    Object? runtime = freezed,
+    Object? releaseDate = freezed,
+    Object? genres = null,
   }) {
     return _then(_value.copyWith(
-      backdropPath: freezed == backdropPath
-          ? _value.backdropPath
-          : backdropPath // ignore: cast_nullable_to_non_nullable
+      posterPath: freezed == posterPath
+          ? _value.posterPath
+          : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalTitle: freezed == originalTitle
-          ? _value.originalTitle
-          : originalTitle // ignore: cast_nullable_to_non_nullable
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      overview: freezed == overview
+          ? _value.overview
+          : overview // ignore: cast_nullable_to_non_nullable
+              as String?,
+      voteCount: freezed == voteCount
+          ? _value.voteCount
+          : voteCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      voteAverage: freezed == voteAverage
+          ? _value.voteAverage
+          : voteAverage // ignore: cast_nullable_to_non_nullable
+              as double?,
+      runtime: freezed == runtime
+          ? _value.runtime
+          : runtime // ignore: cast_nullable_to_non_nullable
+              as int?,
+      releaseDate: freezed == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      genres: null == genres
+          ? _value.genres
+          : genres // ignore: cast_nullable_to_non_nullable
+              as List<Genres>,
     ) as $Val);
   }
 }
@@ -81,7 +126,16 @@ abstract class _$$_DetailsFilmModelCopyWith<$Res>
       __$$_DetailsFilmModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? backdropPath, String? originalTitle, int id});
+  $Res call(
+      {String? posterPath,
+      String? title,
+      int id,
+      String? overview,
+      int? voteCount,
+      double? voteAverage,
+      int? runtime,
+      String? releaseDate,
+      List<Genres> genres});
 }
 
 /// @nodoc
@@ -95,23 +149,53 @@ class __$$_DetailsFilmModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? backdropPath = freezed,
-    Object? originalTitle = freezed,
+    Object? posterPath = freezed,
+    Object? title = freezed,
     Object? id = null,
+    Object? overview = freezed,
+    Object? voteCount = freezed,
+    Object? voteAverage = freezed,
+    Object? runtime = freezed,
+    Object? releaseDate = freezed,
+    Object? genres = null,
   }) {
     return _then(_$_DetailsFilmModel(
-      backdropPath: freezed == backdropPath
-          ? _value.backdropPath
-          : backdropPath // ignore: cast_nullable_to_non_nullable
+      posterPath: freezed == posterPath
+          ? _value.posterPath
+          : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalTitle: freezed == originalTitle
-          ? _value.originalTitle
-          : originalTitle // ignore: cast_nullable_to_non_nullable
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      overview: freezed == overview
+          ? _value.overview
+          : overview // ignore: cast_nullable_to_non_nullable
+              as String?,
+      voteCount: freezed == voteCount
+          ? _value.voteCount
+          : voteCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      voteAverage: freezed == voteAverage
+          ? _value.voteAverage
+          : voteAverage // ignore: cast_nullable_to_non_nullable
+              as double?,
+      runtime: freezed == runtime
+          ? _value.runtime
+          : runtime // ignore: cast_nullable_to_non_nullable
+              as int?,
+      releaseDate: freezed == releaseDate
+          ? _value.releaseDate
+          : releaseDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      genres: null == genres
+          ? _value._genres
+          : genres // ignore: cast_nullable_to_non_nullable
+              as List<Genres>,
     ));
   }
 }
@@ -120,21 +204,47 @@ class __$$_DetailsFilmModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_DetailsFilmModel implements _DetailsFilmModel {
   _$_DetailsFilmModel(
-      {this.backdropPath, this.originalTitle, required this.id});
+      {this.posterPath,
+      this.title,
+      required this.id,
+      this.overview,
+      this.voteCount,
+      this.voteAverage,
+      this.runtime,
+      this.releaseDate,
+      required final List<Genres> genres})
+      : _genres = genres;
 
   factory _$_DetailsFilmModel.fromJson(Map<String, dynamic> json) =>
       _$$_DetailsFilmModelFromJson(json);
 
   @override
-  final String? backdropPath;
+  final String? posterPath;
   @override
-  final String? originalTitle;
+  final String? title;
   @override
   final int id;
+  @override
+  final String? overview;
+  @override
+  final int? voteCount;
+  @override
+  final double? voteAverage;
+  @override
+  final int? runtime;
+  @override
+  final String? releaseDate;
+  final List<Genres> _genres;
+  @override
+  List<Genres> get genres {
+    if (_genres is EqualUnmodifiableListView) return _genres;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_genres);
+  }
 
   @override
   String toString() {
-    return 'DetailsFilmModel(backdropPath: $backdropPath, originalTitle: $originalTitle, id: $id)';
+    return 'DetailsFilmModel(posterPath: $posterPath, title: $title, id: $id, overview: $overview, voteCount: $voteCount, voteAverage: $voteAverage, runtime: $runtime, releaseDate: $releaseDate, genres: $genres)';
   }
 
   @override
@@ -142,16 +252,35 @@ class _$_DetailsFilmModel implements _DetailsFilmModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DetailsFilmModel &&
-            (identical(other.backdropPath, backdropPath) ||
-                other.backdropPath == backdropPath) &&
-            (identical(other.originalTitle, originalTitle) ||
-                other.originalTitle == originalTitle) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.posterPath, posterPath) ||
+                other.posterPath == posterPath) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.overview, overview) ||
+                other.overview == overview) &&
+            (identical(other.voteCount, voteCount) ||
+                other.voteCount == voteCount) &&
+            (identical(other.voteAverage, voteAverage) ||
+                other.voteAverage == voteAverage) &&
+            (identical(other.runtime, runtime) || other.runtime == runtime) &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate) &&
+            const DeepCollectionEquality().equals(other._genres, _genres));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, backdropPath, originalTitle, id);
+  int get hashCode => Object.hash(
+      runtimeType,
+      posterPath,
+      title,
+      id,
+      overview,
+      voteCount,
+      voteAverage,
+      runtime,
+      releaseDate,
+      const DeepCollectionEquality().hash(_genres));
 
   @JsonKey(ignore: true)
   @override
@@ -169,21 +298,185 @@ class _$_DetailsFilmModel implements _DetailsFilmModel {
 
 abstract class _DetailsFilmModel implements DetailsFilmModel {
   factory _DetailsFilmModel(
-      {final String? backdropPath,
-      final String? originalTitle,
-      required final int id}) = _$_DetailsFilmModel;
+      {final String? posterPath,
+      final String? title,
+      required final int id,
+      final String? overview,
+      final int? voteCount,
+      final double? voteAverage,
+      final int? runtime,
+      final String? releaseDate,
+      required final List<Genres> genres}) = _$_DetailsFilmModel;
 
   factory _DetailsFilmModel.fromJson(Map<String, dynamic> json) =
       _$_DetailsFilmModel.fromJson;
 
   @override
-  String? get backdropPath;
+  String? get posterPath;
   @override
-  String? get originalTitle;
+  String? get title;
   @override
   int get id;
   @override
+  String? get overview;
+  @override
+  int? get voteCount;
+  @override
+  double? get voteAverage;
+  @override
+  int? get runtime;
+  @override
+  String? get releaseDate;
+  @override
+  List<Genres> get genres;
+  @override
   @JsonKey(ignore: true)
   _$$_DetailsFilmModelCopyWith<_$_DetailsFilmModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Genres _$GenresFromJson(Map<String, dynamic> json) {
+  return _Genres.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Genres {
+  int get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GenresCopyWith<Genres> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GenresCopyWith<$Res> {
+  factory $GenresCopyWith(Genres value, $Res Function(Genres) then) =
+      _$GenresCopyWithImpl<$Res, Genres>;
+  @useResult
+  $Res call({int id, String? name});
+}
+
+/// @nodoc
+class _$GenresCopyWithImpl<$Res, $Val extends Genres>
+    implements $GenresCopyWith<$Res> {
+  _$GenresCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_GenresCopyWith<$Res> implements $GenresCopyWith<$Res> {
+  factory _$$_GenresCopyWith(_$_Genres value, $Res Function(_$_Genres) then) =
+      __$$_GenresCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int id, String? name});
+}
+
+/// @nodoc
+class __$$_GenresCopyWithImpl<$Res>
+    extends _$GenresCopyWithImpl<$Res, _$_Genres>
+    implements _$$_GenresCopyWith<$Res> {
+  __$$_GenresCopyWithImpl(_$_Genres _value, $Res Function(_$_Genres) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = freezed,
+  }) {
+    return _then(_$_Genres(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Genres implements _Genres {
+  _$_Genres({required this.id, this.name});
+
+  factory _$_Genres.fromJson(Map<String, dynamic> json) =>
+      _$$_GenresFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final String? name;
+
+  @override
+  String toString() {
+    return 'Genres(id: $id, name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Genres &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GenresCopyWith<_$_Genres> get copyWith =>
+      __$$_GenresCopyWithImpl<_$_Genres>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_GenresToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Genres implements Genres {
+  factory _Genres({required final int id, final String? name}) = _$_Genres;
+
+  factory _Genres.fromJson(Map<String, dynamic> json) = _$_Genres.fromJson;
+
+  @override
+  int get id;
+  @override
+  String? get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GenresCopyWith<_$_Genres> get copyWith =>
       throw _privateConstructorUsedError;
 }

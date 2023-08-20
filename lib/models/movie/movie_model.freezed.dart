@@ -188,6 +188,7 @@ mixin _$Results {
   int get id => throw _privateConstructorUsedError;
   String? get overview => throw _privateConstructorUsedError;
   int? get voteCount => throw _privateConstructorUsedError;
+  String? get posterPath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -206,7 +207,8 @@ abstract class $ResultsCopyWith<$Res> {
       double? voteAverage,
       int id,
       String? overview,
-      int? voteCount});
+      int? voteCount,
+      String? posterPath});
 }
 
 /// @nodoc
@@ -229,6 +231,7 @@ class _$ResultsCopyWithImpl<$Res, $Val extends Results>
     Object? id = null,
     Object? overview = freezed,
     Object? voteCount = freezed,
+    Object? posterPath = freezed,
   }) {
     return _then(_value.copyWith(
       backdropPath: freezed == backdropPath
@@ -259,6 +262,10 @@ class _$ResultsCopyWithImpl<$Res, $Val extends Results>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      posterPath: freezed == posterPath
+          ? _value.posterPath
+          : posterPath // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -277,7 +284,8 @@ abstract class _$$_ResultsCopyWith<$Res> implements $ResultsCopyWith<$Res> {
       double? voteAverage,
       int id,
       String? overview,
-      int? voteCount});
+      int? voteCount,
+      String? posterPath});
 }
 
 /// @nodoc
@@ -297,6 +305,7 @@ class __$$_ResultsCopyWithImpl<$Res>
     Object? id = null,
     Object? overview = freezed,
     Object? voteCount = freezed,
+    Object? posterPath = freezed,
   }) {
     return _then(_$_Results(
       backdropPath: freezed == backdropPath
@@ -327,6 +336,10 @@ class __$$_ResultsCopyWithImpl<$Res>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      posterPath: freezed == posterPath
+          ? _value.posterPath
+          : posterPath // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -341,7 +354,8 @@ class _$_Results implements _Results {
       this.voteAverage,
       required this.id,
       this.overview,
-      this.voteCount});
+      this.voteCount,
+      this.posterPath});
 
   factory _$_Results.fromJson(Map<String, dynamic> json) =>
       _$$_ResultsFromJson(json);
@@ -360,10 +374,12 @@ class _$_Results implements _Results {
   final String? overview;
   @override
   final int? voteCount;
+  @override
+  final String? posterPath;
 
   @override
   String toString() {
-    return 'Results(backdropPath: $backdropPath, title: $title, releaseDate: $releaseDate, voteAverage: $voteAverage, id: $id, overview: $overview, voteCount: $voteCount)';
+    return 'Results(backdropPath: $backdropPath, title: $title, releaseDate: $releaseDate, voteAverage: $voteAverage, id: $id, overview: $overview, voteCount: $voteCount, posterPath: $posterPath)';
   }
 
   @override
@@ -382,13 +398,15 @@ class _$_Results implements _Results {
             (identical(other.overview, overview) ||
                 other.overview == overview) &&
             (identical(other.voteCount, voteCount) ||
-                other.voteCount == voteCount));
+                other.voteCount == voteCount) &&
+            (identical(other.posterPath, posterPath) ||
+                other.posterPath == posterPath));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, backdropPath, title, releaseDate,
-      voteAverage, id, overview, voteCount);
+      voteAverage, id, overview, voteCount, posterPath);
 
   @JsonKey(ignore: true)
   @override
@@ -412,7 +430,8 @@ abstract class _Results implements Results {
       final double? voteAverage,
       required final int id,
       final String? overview,
-      final int? voteCount}) = _$_Results;
+      final int? voteCount,
+      final String? posterPath}) = _$_Results;
 
   factory _Results.fromJson(Map<String, dynamic> json) = _$_Results.fromJson;
 
@@ -430,6 +449,8 @@ abstract class _Results implements Results {
   String? get overview;
   @override
   int? get voteCount;
+  @override
+  String? get posterPath;
   @override
   @JsonKey(ignore: true)
   _$$_ResultsCopyWith<_$_Results> get copyWith =>

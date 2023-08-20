@@ -23,6 +23,7 @@ class Results with _$Results {
     required int id,
     String? overview,
     int? voteCount,
+    String? posterPath,
   }) = _Results;
 
   factory Results.fromJson(Map<String, dynamic> json) =>

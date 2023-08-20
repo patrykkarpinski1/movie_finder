@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/injection_container.dart';
 import 'package:movie_finder/features/home/cubit/home_cubit.dart';
-import 'package:movie_finder/widgets/popular_movie_widget.dart';
+import 'package:movie_finder/widgets/films/popular_movie_widget.dart';
 import 'package:movie_finder/widgets/search_widget/cubit/search_cubit.dart';
 import 'package:movie_finder/widgets/search_widget/search_widget.dart';
-import 'package:movie_finder/widgets/top_rated_films_widget.dart';
-import 'package:movie_finder/widgets/tv_series_widget.dart';
+import 'package:movie_finder/widgets/films/top_rated_films_widget.dart';
+import 'package:movie_finder/widgets/series/tv_series_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
