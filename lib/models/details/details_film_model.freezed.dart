@@ -28,7 +28,7 @@ mixin _$DetailsFilmModel {
   double? get voteAverage => throw _privateConstructorUsedError;
   int? get runtime => throw _privateConstructorUsedError;
   String? get releaseDate => throw _privateConstructorUsedError;
-  List<Genres> get genres => throw _privateConstructorUsedError;
+  List<Genres>? get genres => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +51,7 @@ abstract class $DetailsFilmModelCopyWith<$Res> {
       double? voteAverage,
       int? runtime,
       String? releaseDate,
-      List<Genres> genres});
+      List<Genres>? genres});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$DetailsFilmModelCopyWithImpl<$Res, $Val extends DetailsFilmModel>
     Object? voteAverage = freezed,
     Object? runtime = freezed,
     Object? releaseDate = freezed,
-    Object? genres = null,
+    Object? genres = freezed,
   }) {
     return _then(_value.copyWith(
       posterPath: freezed == posterPath
@@ -110,10 +110,10 @@ class _$DetailsFilmModelCopyWithImpl<$Res, $Val extends DetailsFilmModel>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      genres: null == genres
+      genres: freezed == genres
           ? _value.genres
           : genres // ignore: cast_nullable_to_non_nullable
-              as List<Genres>,
+              as List<Genres>?,
     ) as $Val);
   }
 }
@@ -135,7 +135,7 @@ abstract class _$$_DetailsFilmModelCopyWith<$Res>
       double? voteAverage,
       int? runtime,
       String? releaseDate,
-      List<Genres> genres});
+      List<Genres>? genres});
 }
 
 /// @nodoc
@@ -157,7 +157,7 @@ class __$$_DetailsFilmModelCopyWithImpl<$Res>
     Object? voteAverage = freezed,
     Object? runtime = freezed,
     Object? releaseDate = freezed,
-    Object? genres = null,
+    Object? genres = freezed,
   }) {
     return _then(_$_DetailsFilmModel(
       posterPath: freezed == posterPath
@@ -192,10 +192,10 @@ class __$$_DetailsFilmModelCopyWithImpl<$Res>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      genres: null == genres
+      genres: freezed == genres
           ? _value._genres
           : genres // ignore: cast_nullable_to_non_nullable
-              as List<Genres>,
+              as List<Genres>?,
     ));
   }
 }
@@ -212,7 +212,7 @@ class _$_DetailsFilmModel implements _DetailsFilmModel {
       this.voteAverage,
       this.runtime,
       this.releaseDate,
-      required final List<Genres> genres})
+      final List<Genres>? genres})
       : _genres = genres;
 
   factory _$_DetailsFilmModel.fromJson(Map<String, dynamic> json) =>
@@ -234,12 +234,14 @@ class _$_DetailsFilmModel implements _DetailsFilmModel {
   final int? runtime;
   @override
   final String? releaseDate;
-  final List<Genres> _genres;
+  final List<Genres>? _genres;
   @override
-  List<Genres> get genres {
+  List<Genres>? get genres {
+    final value = _genres;
+    if (value == null) return null;
     if (_genres is EqualUnmodifiableListView) return _genres;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_genres);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -306,7 +308,7 @@ abstract class _DetailsFilmModel implements DetailsFilmModel {
       final double? voteAverage,
       final int? runtime,
       final String? releaseDate,
-      required final List<Genres> genres}) = _$_DetailsFilmModel;
+      final List<Genres>? genres}) = _$_DetailsFilmModel;
 
   factory _DetailsFilmModel.fromJson(Map<String, dynamic> json) =
       _$_DetailsFilmModel.fromJson;
@@ -328,7 +330,7 @@ abstract class _DetailsFilmModel implements DetailsFilmModel {
   @override
   String? get releaseDate;
   @override
-  List<Genres> get genres;
+  List<Genres>? get genres;
   @override
   @JsonKey(ignore: true)
   _$$_DetailsFilmModelCopyWith<_$_DetailsFilmModel> get copyWith =>

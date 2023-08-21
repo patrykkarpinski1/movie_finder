@@ -16,8 +16,8 @@ _$_DetailsFilmModel _$$_DetailsFilmModelFromJson(Map<String, dynamic> json) =>
       voteAverage: (json['vote_average'] as num?)?.toDouble(),
       runtime: json['runtime'] as int?,
       releaseDate: json['release_date'] as String?,
-      genres: (json['genres'] as List<dynamic>)
-          .map((e) => Genres.fromJson(e as Map<String, dynamic>))
+      genres: (json['genres'] as List<dynamic>?)
+          ?.map((e) => Genres.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

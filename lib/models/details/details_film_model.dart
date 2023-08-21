@@ -13,7 +13,7 @@ class DetailsFilmModel with _$DetailsFilmModel {
     double? voteAverage,
     int? runtime,
     String? releaseDate,
-    required List<Genres> genres,
+    List<Genres>? genres,
   }) = _DetailsFilmModel;
 
   factory DetailsFilmModel.fromJson(Map<String, dynamic> json) =>

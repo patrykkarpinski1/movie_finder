@@ -3,18 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/app/injection_container.dart';
 import 'package:movie_finder/features/details/cubit/details_cubit.dart';
-import 'package:movie_finder/models/details/details_film_model.dart';
-import 'package:movie_finder/widgets/details/details_film_widget.dart';
+import 'package:movie_finder/models/details/details_series_model.dart';
+import 'package:movie_finder/widgets/details/details_series_widget.dart';
 
-class DetailsFilmPage extends StatelessWidget {
-  const DetailsFilmPage({required this.id, this.filmModel, super.key});
+class DetailsSeriesPage extends StatelessWidget {
+  const DetailsSeriesPage({required this.id, this.seriesModel, super.key});
   final int id;
-  final DetailsFilmModel? filmModel;
+  final DetailsSeriesModel? seriesModel;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<DetailsCubit>(
-      create: (context) => getIt()..getDetailsFilm(id),
+      create: (context) => getIt()..getDetailsSeries(id),
       child: BlocConsumer<DetailsCubit, DetailsState>(
         listener: (context, state) {
           if (state.status == Status.error) {
@@ -39,12 +39,12 @@ class DetailsFilmPage extends StatelessWidget {
             );
           }
           if (state.status == Status.success) {
-            if (state.film == null) {
+            if (state.series == null) {
               return const SizedBox.shrink();
             }
           }
-          if (state.film != null) {
-            final filmModel = state.film!;
+          if (state.series != null) {
+            final seriesModel = state.series!;
             return Scaffold(
                 backgroundColor: Colors.white,
                 bottomNavigationBar: BottomAppBar(
@@ -95,13 +95,13 @@ class DetailsFilmPage extends StatelessWidget {
                         icon: const Icon(Icons.arrow_back_rounded))
                   ],
                 ),
-                body: DetailsFilmWidget(filmModel: filmModel));
+                body: DetailsSeriesWidget(seriesModel: seriesModel));
           } else {
             return Scaffold(
                 appBar: AppBar(),
                 body: const Center(
                     child: Text(
-                  'Film details not available.',
+                  'Series details not available.',
                   style: TextStyle(fontSize: 24),
                 )));
           }

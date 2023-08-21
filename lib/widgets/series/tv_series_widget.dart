@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/core/enums.dart';
+import 'package:movie_finder/features/details/details_series_page.dart';
 import 'package:movie_finder/features/home/cubit/home_cubit.dart';
 import 'package:movie_finder/models/series/tv_series_model.dart';
 
@@ -30,6 +31,7 @@ class _TvSeriesWidgetState extends State<TvSeriesWidget> {
       },
       builder: (context, state) {
         if (state.status == Status.loading) {
+          return Container();
         } else if (state.status == Status.initial) {
           context.read<HomeCubit>().getMovieAndSeries();
         }
@@ -129,25 +131,45 @@ class _TvSeriesWidgetState extends State<TvSeriesWidget> {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       bottom: 15, right: 10),
-                                  child: ClipRRect(
-                                    child: Container(
-                                      constraints: const BoxConstraints(
-                                        maxHeight: 140,
-                                        maxWidth: 260,
-                                      ),
-                                      child: result.backdropPath != null
-                                          ? FadeInImage(
-                                              placeholder: const AssetImage(
-                                                  'images/reload.png'),
-                                              image: NetworkImage(
-                                                'https://image.tmdb.org/t/p/w500${result.backdropPath}',
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (result?.id != null) {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (_) => DetailsSeriesPage(
+                                                id: result!.id),
+                                          ),
+                                        );
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text('ID not available!'),
+                                            backgroundColor: Colors.red,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    child: ClipRRect(
+                                      child: Container(
+                                        constraints: const BoxConstraints(
+                                          maxHeight: 140,
+                                          maxWidth: 260,
+                                        ),
+                                        child: result.backdropPath != null
+                                            ? FadeInImage(
+                                                placeholder: const AssetImage(
+                                                    'images/reload.png'),
+                                                image: NetworkImage(
+                                                  'https://image.tmdb.org/t/p/w500${result.backdropPath}',
+                                                ),
+                                              )
+                                            : const Image(
+                                                image: AssetImage(
+                                                    'images/film.png'),
+                                                fit: BoxFit.cover,
                                               ),
-                                            )
-                                          : const Image(
-                                              image:
-                                                  AssetImage('images/film.png'),
-                                              fit: BoxFit.cover,
-                                            ),
+                                      ),
                                     ),
                                   ),
                                 ),

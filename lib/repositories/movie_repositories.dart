@@ -1,5 +1,6 @@
 import 'package:movie_finder/data/movie_data_source.dart';
 import 'package:movie_finder/models/details/details_film_model.dart';
+import 'package:movie_finder/models/details/details_series_model.dart';
 import 'package:movie_finder/models/movie/movie_model.dart';
 import 'package:movie_finder/models/search/search_model.dart';
 import 'package:movie_finder/models/series/tv_series_model.dart';
@@ -33,5 +34,9 @@ class MovieRepository {
 
   Future<DetailsFilmModel?> getDetailsFilm({required int movieId}) async {
     return movieDataSource.getDetailsFilm(movieId);
+  }
+
+  Future<DetailsSeriesModel?> getDetailsSeries({required int seriesId}) async {
+    return movieDataSource.getDetailsSeries(seriesId);
   }
 }

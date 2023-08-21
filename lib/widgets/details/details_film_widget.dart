@@ -27,30 +27,49 @@ class DetailsFilmWidget extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: filmModel.genres.expand((genre) {
-            return [
-              if (filmModel.genres.indexOf(genre) != 0) ...[
-                const Text(
-                  '•',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  genre.name ?? 'download error',
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ];
-          }).toList(),
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 2.0,
+          runSpacing: 2.0,
+          children: filmModel.genres?.expand((genre) {
+                return [
+                  if (filmModel.genres?.indexOf(genre) != 0)
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          '•',
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(width: 1.0),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            genre.name ?? 'download error',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  if (filmModel.genres?.indexOf(genre) == 0)
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        genre.name ?? 'download error',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                ];
+              }).toList() ??
+              [],
         ),
         Column(
           children: [
