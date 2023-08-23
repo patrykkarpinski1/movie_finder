@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:movie_finder/app/core/enums.dart';
 part 'search_model.freezed.dart';
 part 'search_model.g.dart';
 
@@ -20,7 +21,9 @@ class Results with _$Results {
   factory Results({
     String? posterPath,
     String? name,
+    String? title,
     required int id,
+    MediaType? type,
   }) = _Results;
 
   factory Results.fromJson(Map<String, dynamic> json) =>

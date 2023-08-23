@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/core/enums.dart';
+import 'package:movie_finder/features/details/details_film_page.dart';
+import 'package:movie_finder/features/details/details_series_page.dart';
 import 'package:movie_finder/models/search/search_model.dart';
 import 'package:movie_finder/widgets/search_widget/cubit/search_cubit.dart';
 
@@ -13,18 +15,34 @@ class SearchWidget extends StatefulWidget {
   State<SearchWidget> createState() => _SearchWidgetState();
 }
 
-class _SearchWidgetState extends State<SearchWidget> {
+class _SearchWidgetState extends State<SearchWidget>
+    with WidgetsBindingObserver {
   final TextEditingController controller = TextEditingController();
-
   OverlayEntry? overlayEntry;
+  bool isOverlayVisible = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     controller.addListener(() => onSearchChanged(context));
   }
 
-  OverlayEntry createOverlayEntry(BuildContext context, List<Results> movies) {
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && isOverlayVisible) {
+      hideOverlay();
+    }
+  }
+
+  void hideOverlay() {
+    if (isOverlayVisible && overlayEntry != null && overlayEntry!.mounted) {
+      overlayEntry?.remove();
+      isOverlayVisible = false;
+    }
+  }
+
+  OverlayEntry createOverlayEntry(BuildContext context, List<Results> results) {
     RenderBox renderBox = context.findRenderObject()! as RenderBox;
     var size = renderBox.size;
     var offset = renderBox.localToGlobal(Offset.zero);
@@ -39,23 +57,39 @@ class _SearchWidgetState extends State<SearchWidget> {
           elevation: 4.0,
           child: ListView.builder(
             padding: EdgeInsets.zero,
-            itemCount: movies.length,
+            itemCount: results.length,
             itemBuilder: (context, index) {
               return InkWell(
-                onTap: () {},
+                onTap: () {
+                  overlayEntry?.remove();
+                  controller.clear();
+                  if (results[index].type == MediaType.movie) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          DetailsFilmPage(id: results[index].id),
+                    ));
+                  } else if (results[index].type == MediaType.series) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          DetailsSeriesPage(id: results[index].id),
+                    ));
+                  }
+                },
                 child: ListTile(
-                  leading: movies[index].posterPath != null
+                  leading: results[index].posterPath != null
                       ? FadeInImage(
                           placeholder: const AssetImage('images/reload.png'),
                           image: NetworkImage(
-                            'https://image.tmdb.org/t/p/w500${movies[index].posterPath}',
+                            'https://image.tmdb.org/t/p/w500${results[index].posterPath}',
                           ),
                         )
                       : const Image(
                           image: AssetImage('images/film.png'),
                           fit: BoxFit.cover,
                         ),
-                  title: Text(movies[index].name ?? 'download error'),
+                  title: Text(results[index].name ??
+                      results[index].title ??
+                      'download error'),
                 ),
               );
             },
@@ -79,8 +113,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     return BlocConsumer<SearchCubit, SearchState>(
       listener: (context, state) {
         if (state.status == Status.loading) {
-          overlayEntry?.remove();
-          overlayEntry = null;
+          hideOverlay();
         } else if (state.status == Status.success) {
           List<Results> combinedResults = [];
           if (state.films?.results != null) {
@@ -89,13 +122,15 @@ class _SearchWidgetState extends State<SearchWidget> {
           if (state.series?.results != null) {
             combinedResults.addAll(state.series!.results!);
           }
-          List<Results> validResults =
-              combinedResults.where((result) => result.name != null).toList();
+          List<Results> validResults = combinedResults
+              .where((result) => result.name != null || result.title != null)
+              .toList();
 
           if (validResults.isNotEmpty) {
-            overlayEntry?.remove();
+            hideOverlay();
             overlayEntry = createOverlayEntry(context, validResults);
             Overlay.of(context)?.insert(overlayEntry!);
+            isOverlayVisible = true;
           }
         }
       },
@@ -140,10 +175,11 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     searchDebouncer?.cancel();
     controller.removeListener(() => onSearchChanged(context));
     controller.dispose();
-    overlayEntry?.remove();
+    hideOverlay();
     super.dispose();
   }
 }

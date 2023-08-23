@@ -228,7 +228,9 @@ Results _$ResultsFromJson(Map<String, dynamic> json) {
 mixin _$Results {
   String? get posterPath => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  MediaType? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -240,7 +242,12 @@ abstract class $ResultsCopyWith<$Res> {
   factory $ResultsCopyWith(Results value, $Res Function(Results) then) =
       _$ResultsCopyWithImpl<$Res, Results>;
   @useResult
-  $Res call({String? posterPath, String? name, int id});
+  $Res call(
+      {String? posterPath,
+      String? name,
+      String? title,
+      int id,
+      MediaType? type});
 }
 
 /// @nodoc
@@ -258,7 +265,9 @@ class _$ResultsCopyWithImpl<$Res, $Val extends Results>
   $Res call({
     Object? posterPath = freezed,
     Object? name = freezed,
+    Object? title = freezed,
     Object? id = null,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       posterPath: freezed == posterPath
@@ -269,10 +278,18 @@ class _$ResultsCopyWithImpl<$Res, $Val extends Results>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MediaType?,
     ) as $Val);
   }
 }
@@ -284,7 +301,12 @@ abstract class _$$_ResultsCopyWith<$Res> implements $ResultsCopyWith<$Res> {
       __$$_ResultsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? posterPath, String? name, int id});
+  $Res call(
+      {String? posterPath,
+      String? name,
+      String? title,
+      int id,
+      MediaType? type});
 }
 
 /// @nodoc
@@ -299,7 +321,9 @@ class __$$_ResultsCopyWithImpl<$Res>
   $Res call({
     Object? posterPath = freezed,
     Object? name = freezed,
+    Object? title = freezed,
     Object? id = null,
+    Object? type = freezed,
   }) {
     return _then(_$_Results(
       posterPath: freezed == posterPath
@@ -310,10 +334,18 @@ class __$$_ResultsCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MediaType?,
     ));
   }
 }
@@ -321,7 +353,8 @@ class __$$_ResultsCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Results implements _Results {
-  _$_Results({this.posterPath, this.name, required this.id});
+  _$_Results(
+      {this.posterPath, this.name, this.title, required this.id, this.type});
 
   factory _$_Results.fromJson(Map<String, dynamic> json) =>
       _$$_ResultsFromJson(json);
@@ -331,11 +364,15 @@ class _$_Results implements _Results {
   @override
   final String? name;
   @override
+  final String? title;
+  @override
   final int id;
+  @override
+  final MediaType? type;
 
   @override
   String toString() {
-    return 'Results(posterPath: $posterPath, name: $name, id: $id)';
+    return 'Results(posterPath: $posterPath, name: $name, title: $title, id: $id, type: $type)';
   }
 
   @override
@@ -346,12 +383,15 @@ class _$_Results implements _Results {
             (identical(other.posterPath, posterPath) ||
                 other.posterPath == posterPath) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, posterPath, name, id);
+  int get hashCode =>
+      Object.hash(runtimeType, posterPath, name, title, id, type);
 
   @JsonKey(ignore: true)
   @override
@@ -371,7 +411,9 @@ abstract class _Results implements Results {
   factory _Results(
       {final String? posterPath,
       final String? name,
-      required final int id}) = _$_Results;
+      final String? title,
+      required final int id,
+      final MediaType? type}) = _$_Results;
 
   factory _Results.fromJson(Map<String, dynamic> json) = _$_Results.fromJson;
 
@@ -380,7 +422,11 @@ abstract class _Results implements Results {
   @override
   String? get name;
   @override
+  String? get title;
+  @override
   int get id;
+  @override
+  MediaType? get type;
   @override
   @JsonKey(ignore: true)
   _$$_ResultsCopyWith<_$_Results> get copyWith =>

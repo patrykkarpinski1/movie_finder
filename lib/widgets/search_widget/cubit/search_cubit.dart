@@ -11,27 +11,39 @@ part 'search_cubit.freezed.dart';
 class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this.movieRepository) : super(const SearchState());
   final MovieRepository movieRepository;
+
   Future<void> search({required String query}) async {
-    emit(
-      const SearchState(status: Status.loading),
-    );
+    emit(const SearchState(status: Status.loading));
     try {
-      final searchFilms = await movieRepository.searchTvSeries(query: query);
-      final searchSeries = await movieRepository.searchMovie(query: query);
+      final searchMovieResults =
+          await movieRepository.searchMovie(query: query);
+      final searchSeriesResults =
+          await movieRepository.searchTvSeries(query: query);
+
+      List<Results>? movieResultsWithType;
+      List<Results>? seriesResultsWithType;
+
+      if (searchMovieResults?.results != null) {
+        movieResultsWithType = searchMovieResults?.results
+            ?.map((result) => result.copyWith(type: MediaType.movie))
+            .toList();
+      }
+
+      if (searchSeriesResults?.results != null) {
+        seriesResultsWithType = searchSeriesResults?.results
+            ?.map((result) => result.copyWith(type: MediaType.series))
+            .toList();
+      }
+
       emit(
         SearchState(
           status: Status.success,
-          films: searchFilms,
-          series: searchSeries,
+          films: searchMovieResults?.copyWith(results: movieResultsWithType),
+          series: searchSeriesResults?.copyWith(results: seriesResultsWithType),
         ),
       );
     } catch (error) {
-      emit(
-        SearchState(
-          status: Status.error,
-          errorMessage: error.toString(),
-        ),
-      );
+      emit(SearchState(status: Status.error, errorMessage: error.toString()));
     }
   }
 }
