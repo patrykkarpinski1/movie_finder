@@ -1,12 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/core/enums.dart';
-import 'package:movie_finder/features/details/details_film_page.dart';
-import 'package:movie_finder/features/details/details_series_page.dart';
 import 'package:movie_finder/models/search/search_model.dart';
 import 'package:movie_finder/widgets/search_widget/cubit/search_cubit.dart';
+import 'package:movie_finder/widgets/search_widget/overlay_entry.dart';
 
 class SearchWidget extends StatefulWidget {
   const SearchWidget({Key? key}) : super(key: key);
@@ -20,6 +18,8 @@ class _SearchWidgetState extends State<SearchWidget>
   final TextEditingController controller = TextEditingController();
   OverlayEntry? overlayEntry;
   bool isOverlayVisible = false;
+
+  Timer? searchDebouncer;
 
   @override
   void initState() {
@@ -41,65 +41,6 @@ class _SearchWidgetState extends State<SearchWidget>
       isOverlayVisible = false;
     }
   }
-
-  OverlayEntry createOverlayEntry(BuildContext context, List<Results> results) {
-    RenderBox renderBox = context.findRenderObject()! as RenderBox;
-    var size = renderBox.size;
-    var offset = renderBox.localToGlobal(Offset.zero);
-
-    return OverlayEntry(
-      builder: (context) => Positioned(
-        left: offset.dx,
-        top: offset.dy + size.height,
-        width: size.width,
-        height: 200.0,
-        child: Material(
-          elevation: 4.0,
-          child: ListView.builder(
-            padding: EdgeInsets.zero,
-            itemCount: results.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  overlayEntry?.remove();
-                  controller.clear();
-                  if (results[index].type == MediaType.movie) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          DetailsFilmPage(id: results[index].id),
-                    ));
-                  } else if (results[index].type == MediaType.series) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          DetailsSeriesPage(id: results[index].id),
-                    ));
-                  }
-                },
-                child: ListTile(
-                  leading: results[index].posterPath != null
-                      ? FadeInImage(
-                          placeholder: const AssetImage('images/reload.png'),
-                          image: NetworkImage(
-                            'https://image.tmdb.org/t/p/w500${results[index].posterPath}',
-                          ),
-                        )
-                      : const Image(
-                          image: AssetImage('images/film.png'),
-                          fit: BoxFit.cover,
-                        ),
-                  title: Text(results[index].name ??
-                      results[index].title ??
-                      'download error'),
-                ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  Timer? searchDebouncer;
 
   onSearchChanged(BuildContext context) {
     if (searchDebouncer?.isActive ?? false) searchDebouncer?.cancel();
@@ -128,7 +69,8 @@ class _SearchWidgetState extends State<SearchWidget>
 
           if (validResults.isNotEmpty) {
             hideOverlay();
-            overlayEntry = createOverlayEntry(context, validResults);
+            overlayEntry = createOverlayEntry(
+                context, validResults, overlayEntry, controller);
             Overlay.of(context)?.insert(overlayEntry!);
             isOverlayVisible = true;
           }
