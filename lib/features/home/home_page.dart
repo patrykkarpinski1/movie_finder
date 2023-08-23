@@ -21,9 +21,12 @@ class _HomePageState extends State<HomePage>
   late Animation<double> animation;
   late Animation<Offset> slideAnimation;
   bool isSearchVisible = false;
+  late ScrollController scrollController;
+
   @override
   void initState() {
     super.initState();
+    scrollController = ScrollController();
 
     animationController = AnimationController(
       duration: const Duration(milliseconds: 500),
@@ -54,6 +57,8 @@ class _HomePageState extends State<HomePage>
         isSearchVisible = true;
       });
       animationController.forward();
+      scrollController.animateTo(0.0,
+          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
     }
   }
 
@@ -84,6 +89,7 @@ class _HomePageState extends State<HomePage>
           ),
         ),
         body: ListView(
+          controller: scrollController,
           children: [
             SlideTransition(
               position: slideAnimation,
@@ -116,6 +122,7 @@ class _HomePageState extends State<HomePage>
   @override
   void dispose() {
     animationController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 }
