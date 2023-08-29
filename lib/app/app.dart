@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_finder/features/home/home_page.dart';
+import 'package:movie_finder/auth/auth_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: const HomePage(),
+      home: const AuthPage(),
     );
   }
 }

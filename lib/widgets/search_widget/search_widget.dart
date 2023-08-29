@@ -71,7 +71,7 @@ class _SearchWidgetState extends State<SearchWidget>
             hideOverlay();
             overlayEntry = createOverlayEntry(
                 context, validResults, overlayEntry, controller);
-            Overlay.of(context)?.insert(overlayEntry!);
+            Overlay.of(context).insert(overlayEntry!);
             isOverlayVisible = true;
           }
         }
