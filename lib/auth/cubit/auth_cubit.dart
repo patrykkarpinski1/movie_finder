@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/models/account/user_model.dart';
 import 'package:movie_finder/repositories/account_repositories.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:uni_links/uni_links.dart';
 
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
@@ -16,31 +18,65 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(const AuthState(status: Status.loading));
 
-      final requestToken = await accountRepository.generateRequestToken();
+      final generatedAuth = await accountRepository.generateRequestToken();
 
-      if (requestToken == null || requestToken.requestToken == null) {
+      if (generatedAuth == null || generatedAuth.requestToken == null) {
         emit(const AuthState(
             errorMessage: 'The request token could not be obtained.'));
         return;
       }
 
-      final url =
-          'https://www.themoviedb.org/authenticate/${requestToken.requestToken}';
+      accountRepository.openAuthenticationUrl(generatedAuth.requestToken!);
 
-      launchUrl(Uri.parse(url));
+      Uri? uri;
+      try {
+        uri = await getInitialUri();
+      } on FormatException {
+        emit(const AuthState(
+            errorMessage: "Invalid URI format.", status: Status.error));
+        return;
+      } catch (error) {
+        emit(AuthState(errorMessage: error.toString(), status: Status.error));
+        return;
+      }
 
-      await Future.delayed(const Duration(minutes: 5));
+      StreamSubscription? sub;
+      try {
+        if (uri == null) {
+          sub = uriLinkStream.listen((Uri? incomingUri) {
+            if (incomingUri != null) {
+              uri = incomingUri;
+              sub?.cancel();
+            }
+          });
 
-      final userModel =
-          await accountRepository.createSessionId(requestToken.requestToken!);
+          int timeoutCounter = 0;
+          while (uri == null && timeoutCounter < 150) {
+            await Future.delayed(const Duration(milliseconds: 100));
+            timeoutCounter++;
+          }
 
-      if (userModel == null || userModel.sessionId == null) {
+          if (uri == null) {
+            emit(const AuthState(
+                errorMessage: "Timeout waiting for URI.",
+                status: Status.error));
+            return;
+          }
+        }
+      } finally {
+        sub?.cancel();
+      }
+
+      final authResult =
+          await accountRepository.createSessionId(generatedAuth.requestToken!);
+
+      if (authResult == null || authResult.sessionId == null) {
         emit(const AuthState(
             errorMessage: 'The session identifier could not be obtained.'));
         return;
       }
 
-      emit(AuthState(userModel: userModel, status: Status.success));
+      emit(AuthState(authModel: authResult, status: Status.success));
     } catch (error) {
       emit(AuthState(errorMessage: error.toString(), status: Status.error));
     }

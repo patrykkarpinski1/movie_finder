@@ -13,9 +13,9 @@ abstract class AccountRemoteRetrofitDataSource {
       _AccountRemoteRetrofitDataSource;
 
   @GET('authentication/token/new')
-  Future<UserModel> generateRequestToken();
+  Future<AuthModel> generateRequestToken();
 
   @POST('authentication/session/new')
-  Future<UserModel> createSessionId(
+  Future<AuthModel> createSessionId(
       @Field('request_token') String requestToken);
 }

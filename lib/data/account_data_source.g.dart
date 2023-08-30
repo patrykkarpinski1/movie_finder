@@ -20,13 +20,13 @@ class _AccountRemoteRetrofitDataSource
   String? baseUrl;
 
   @override
-  Future<UserModel> generateRequestToken() async {
+  Future<AuthModel> generateRequestToken() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UserModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<AuthModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -38,18 +38,18 @@ class _AccountRemoteRetrofitDataSource
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UserModel.fromJson(_result.data!);
+    final value = AuthModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<UserModel> createSessionId(String requestToken) async {
+  Future<AuthModel> createSessionId(String requestToken) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'request_token': requestToken};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UserModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<AuthModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -61,7 +61,7 @@ class _AccountRemoteRetrofitDataSource
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UserModel.fromJson(_result.data!);
+    final value = AuthModel.fromJson(_result.data!);
     return value;
   }
 

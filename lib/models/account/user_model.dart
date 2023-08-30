@@ -3,13 +3,12 @@ part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
 @freezed
-class UserModel with _$UserModel {
-  factory UserModel({
+class AuthModel with _$AuthModel {
+  factory AuthModel({
     String? sessionId,
     String? requestToken,
-    String? username,
-  }) = _UserModel;
+  }) = _AuthModel;
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory AuthModel.fromJson(Map<String, dynamic> json) =>
+      _$AuthModelFromJson(json);
 }

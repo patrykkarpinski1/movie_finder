@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthState {
   Status get status => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
-  UserModel? get userModel => throw _privateConstructorUsedError;
+  AuthModel? get authModel => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith =>
@@ -30,9 +30,9 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call({Status status, String? errorMessage, UserModel? userModel});
+  $Res call({Status status, String? errorMessage, AuthModel? authModel});
 
-  $UserModelCopyWith<$Res>? get userModel;
+  $AuthModelCopyWith<$Res>? get authModel;
 }
 
 /// @nodoc
@@ -50,7 +50,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   $Res call({
     Object? status = null,
     Object? errorMessage = freezed,
-    Object? userModel = freezed,
+    Object? authModel = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -61,22 +61,22 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      userModel: freezed == userModel
-          ? _value.userModel
-          : userModel // ignore: cast_nullable_to_non_nullable
-              as UserModel?,
+      authModel: freezed == authModel
+          ? _value.authModel
+          : authModel // ignore: cast_nullable_to_non_nullable
+              as AuthModel?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res>? get userModel {
-    if (_value.userModel == null) {
+  $AuthModelCopyWith<$Res>? get authModel {
+    if (_value.authModel == null) {
       return null;
     }
 
-    return $UserModelCopyWith<$Res>(_value.userModel!, (value) {
-      return _then(_value.copyWith(userModel: value) as $Val);
+    return $AuthModelCopyWith<$Res>(_value.authModel!, (value) {
+      return _then(_value.copyWith(authModel: value) as $Val);
     });
   }
 }
@@ -88,10 +88,10 @@ abstract class _$$_AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       __$$_AuthStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status status, String? errorMessage, UserModel? userModel});
+  $Res call({Status status, String? errorMessage, AuthModel? authModel});
 
   @override
-  $UserModelCopyWith<$Res>? get userModel;
+  $AuthModelCopyWith<$Res>? get authModel;
 }
 
 /// @nodoc
@@ -107,7 +107,7 @@ class __$$_AuthStateCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? errorMessage = freezed,
-    Object? userModel = freezed,
+    Object? authModel = freezed,
   }) {
     return _then(_$_AuthState(
       status: null == status
@@ -118,10 +118,10 @@ class __$$_AuthStateCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      userModel: freezed == userModel
-          ? _value.userModel
-          : userModel // ignore: cast_nullable_to_non_nullable
-              as UserModel?,
+      authModel: freezed == authModel
+          ? _value.authModel
+          : authModel // ignore: cast_nullable_to_non_nullable
+              as AuthModel?,
     ));
   }
 }
@@ -130,7 +130,7 @@ class __$$_AuthStateCopyWithImpl<$Res>
 
 class _$_AuthState implements _AuthState {
   const _$_AuthState(
-      {this.status = Status.initial, this.errorMessage, this.userModel});
+      {this.status = Status.initial, this.errorMessage, this.authModel});
 
   @override
   @JsonKey()
@@ -138,11 +138,11 @@ class _$_AuthState implements _AuthState {
   @override
   final String? errorMessage;
   @override
-  final UserModel? userModel;
+  final AuthModel? authModel;
 
   @override
   String toString() {
-    return 'AuthState(status: $status, errorMessage: $errorMessage, userModel: $userModel)';
+    return 'AuthState(status: $status, errorMessage: $errorMessage, authModel: $authModel)';
   }
 
   @override
@@ -153,12 +153,12 @@ class _$_AuthState implements _AuthState {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            (identical(other.userModel, userModel) ||
-                other.userModel == userModel));
+            (identical(other.authModel, authModel) ||
+                other.authModel == authModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, errorMessage, userModel);
+  int get hashCode => Object.hash(runtimeType, status, errorMessage, authModel);
 
   @JsonKey(ignore: true)
   @override
@@ -171,14 +171,14 @@ abstract class _AuthState implements AuthState {
   const factory _AuthState(
       {final Status status,
       final String? errorMessage,
-      final UserModel? userModel}) = _$_AuthState;
+      final AuthModel? authModel}) = _$_AuthState;
 
   @override
   Status get status;
   @override
   String? get errorMessage;
   @override
-  UserModel? get userModel;
+  AuthModel? get authModel;
   @override
   @JsonKey(ignore: true)
   _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>

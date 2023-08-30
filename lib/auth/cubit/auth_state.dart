@@ -5,6 +5,6 @@ class AuthState with _$AuthState {
   const factory AuthState({
     @Default(Status.initial) Status status,
     String? errorMessage,
-    UserModel? userModel,
+    AuthModel? authModel,
   }) = _AuthState;
 }
