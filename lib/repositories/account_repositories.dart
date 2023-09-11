@@ -1,6 +1,5 @@
 import 'package:movie_finder/data/account_data_source.dart';
-import 'package:movie_finder/models/account/user_model.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:movie_finder/models/account/auth_model.dart';
 
 class AccountRepository {
   AccountRepository(this.accountDataSource);
@@ -13,8 +12,27 @@ class AccountRepository {
     return accountDataSource.createSessionId(requestToken);
   }
 
-  void openAuthenticationUrl(String requestToken) {
-    final url = 'https://www.themoviedb.org/authenticate/$requestToken';
-    launchUrl(Uri.parse(url));
+  Future<String> loginUser(String username, String password) async {
+    AuthModel requestTokenModel =
+        await accountDataSource.generateRequestToken();
+
+    AuthModel loginResponse = await accountDataSource.loginUser({
+      "username": username,
+      "password": password,
+      "request_token": requestTokenModel.requestToken!
+    });
+
+    if (loginResponse.requestToken != null) {
+      AuthModel sessionResponse =
+          await accountDataSource.createSessionId(loginResponse.requestToken!);
+      if (sessionResponse.sessionId != null) {
+        return sessionResponse.sessionId!;
+      }
+    }
+    throw Exception('Failed to obtain session ID.');
+  }
+
+  Future<AuthModel?> deleteSession(String sessionId) async {
+    return accountDataSource.deleteSession({"session_id": sessionId});
   }
 }

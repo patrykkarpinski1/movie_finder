@@ -1,7 +1,4 @@
-enum Flavor {
-  development,
-  production,
-}
+import 'package:movie_finder/app/core/enums.dart';
 
 class Config {
   static Flavor appFlavor = Flavor.development;

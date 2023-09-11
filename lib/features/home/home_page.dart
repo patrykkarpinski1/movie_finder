@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/injection_container.dart';
 import 'package:movie_finder/features/home/cubit/home_cubit.dart';
+import 'package:movie_finder/widgets/drawer_menu_widget.dart';
 import 'package:movie_finder/widgets/films/popular_movie_widget.dart';
 import 'package:movie_finder/widgets/search_widget/cubit/search_cubit.dart';
 import 'package:movie_finder/widgets/search_widget/search_widget.dart';
@@ -74,6 +75,7 @@ class _HomePageState extends State<HomePage>
         ),
       ],
       child: Scaffold(
+        drawer: const DrawerMenuWidget(),
         appBar: AppBar(
           backgroundColor: Colors.black,
           title: Row(

@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: const AuthPage(),
+      home: AuthPage(),
     );
   }
 }

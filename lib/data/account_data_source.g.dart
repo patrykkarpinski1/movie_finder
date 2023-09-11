@@ -65,6 +65,54 @@ class _AccountRemoteRetrofitDataSource
     return value;
   }
 
+  @override
+  Future<AuthModel> loginUser(Map<String, dynamic> loginData) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(loginData);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AuthModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'authentication/token/validate_with_login',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AuthModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AuthModel> deleteSession(Map<String, dynamic> sessionData) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(sessionData);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AuthModel>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'authentication/session',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AuthModel.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
