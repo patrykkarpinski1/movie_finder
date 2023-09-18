@@ -24,42 +24,28 @@ class AuthPage extends StatelessWidget {
             }
             return BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
-                if (state.status == Status.error) {
-                  final errorMessage = state.errorMessage ?? 'Unknown error';
+                if (state.errorMessage != null) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(errorMessage),
+                      content: Text(state.errorMessage ?? 'Unknown error'),
                       backgroundColor: Colors.red,
                     ),
                   );
-                } else if (state.status == Status.success) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ));
                 }
               },
               builder: (context, state) {
                 switch (state.status) {
-                  case Status.initial:
-                    return const Scaffold(
-                      body: Center(child: Text('Initial State')),
-                    );
+                  case Status.authenticated:
+                    return const HomePage();
                   case Status.loading:
                     return const Scaffold(
                       body: Center(child: CircularProgressIndicator()),
                     );
-                  case Status.error:
-                    return const Center(
-                        child: Text('an unexpected error occurred'));
-                  case Status.authenticated:
-                    return const HomePage();
                   case Status.unauthenticated:
-                    return LoginPage(
-                        usernameController: usernameController,
-                        passwordController: passwordController);
                   default:
-                    return const Scaffold(
-                      body: Center(child: CircularProgressIndicator()),
+                    return LoginPage(
+                      usernameController: usernameController,
+                      passwordController: passwordController,
                     );
                 }
               },

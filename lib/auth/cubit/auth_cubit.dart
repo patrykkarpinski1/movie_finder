@@ -21,9 +21,10 @@ class AuthCubit extends Cubit<AuthState> {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('sessionId', sessionId);
 
-      emit(const AuthState(status: Status.success));
+      emit(state.copyWith(status: Status.authenticated));
     } catch (error) {
-      emit(AuthState(errorMessage: error.toString(), status: Status.error));
+      emit(state.copyWith(
+          errorMessage: error.toString(), status: Status.unauthenticated));
     }
   }
 
@@ -31,11 +32,11 @@ class AuthCubit extends Cubit<AuthState> {
     final prefs = await SharedPreferences.getInstance();
     final sessionId = prefs.getString('sessionId');
     if (sessionId != null && sessionId.isNotEmpty) {
-      emit(AuthState(
+      emit(state.copyWith(
           authModel: AuthModel(sessionId: sessionId),
           status: Status.authenticated));
     } else {
-      emit(const AuthState(status: Status.unauthenticated));
+      emit(state.copyWith(status: Status.unauthenticated));
     }
   }
 
@@ -45,7 +46,7 @@ class AuthCubit extends Cubit<AuthState> {
       final sessionId = prefs.getString('sessionId');
 
       if (sessionId == null || sessionId.isEmpty) {
-        emit(const AuthState(
+        emit(state.copyWith(
             errorMessage: "Session ID not found", status: Status.error));
       }
 
@@ -53,9 +54,10 @@ class AuthCubit extends Cubit<AuthState> {
 
       await prefs.remove('sessionId');
 
-      emit(const AuthState(status: Status.unauthenticated));
+      emit(state.copyWith(status: Status.unauthenticated));
     } catch (error) {
-      emit(AuthState(errorMessage: error.toString(), status: Status.error));
+      emit(
+          state.copyWith(errorMessage: error.toString(), status: Status.error));
     }
   }
 }
