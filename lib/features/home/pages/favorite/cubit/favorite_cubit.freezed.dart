@@ -18,9 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$FavoriteState {
   Status get status => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
-  AccountMovieModel? get movies => throw _privateConstructorUsedError;
+  MovieModel? get movies => throw _privateConstructorUsedError;
   Map<int, bool>? get favoriteStatus => throw _privateConstructorUsedError;
   bool? get hasChanged => throw _privateConstructorUsedError;
+  TvSeriesModel? get series => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FavoriteStateCopyWith<FavoriteState> get copyWith =>
@@ -36,11 +37,13 @@ abstract class $FavoriteStateCopyWith<$Res> {
   $Res call(
       {Status status,
       String? errorMessage,
-      AccountMovieModel? movies,
+      MovieModel? movies,
       Map<int, bool>? favoriteStatus,
-      bool? hasChanged});
+      bool? hasChanged,
+      TvSeriesModel? series});
 
-  $AccountMovieModelCopyWith<$Res>? get movies;
+  $MovieModelCopyWith<$Res>? get movies;
+  $TvSeriesModelCopyWith<$Res>? get series;
 }
 
 /// @nodoc
@@ -61,6 +64,7 @@ class _$FavoriteStateCopyWithImpl<$Res, $Val extends FavoriteState>
     Object? movies = freezed,
     Object? favoriteStatus = freezed,
     Object? hasChanged = freezed,
+    Object? series = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -74,7 +78,7 @@ class _$FavoriteStateCopyWithImpl<$Res, $Val extends FavoriteState>
       movies: freezed == movies
           ? _value.movies
           : movies // ignore: cast_nullable_to_non_nullable
-              as AccountMovieModel?,
+              as MovieModel?,
       favoriteStatus: freezed == favoriteStatus
           ? _value.favoriteStatus
           : favoriteStatus // ignore: cast_nullable_to_non_nullable
@@ -83,18 +87,34 @@ class _$FavoriteStateCopyWithImpl<$Res, $Val extends FavoriteState>
           ? _value.hasChanged
           : hasChanged // ignore: cast_nullable_to_non_nullable
               as bool?,
+      series: freezed == series
+          ? _value.series
+          : series // ignore: cast_nullable_to_non_nullable
+              as TvSeriesModel?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AccountMovieModelCopyWith<$Res>? get movies {
+  $MovieModelCopyWith<$Res>? get movies {
     if (_value.movies == null) {
       return null;
     }
 
-    return $AccountMovieModelCopyWith<$Res>(_value.movies!, (value) {
+    return $MovieModelCopyWith<$Res>(_value.movies!, (value) {
       return _then(_value.copyWith(movies: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TvSeriesModelCopyWith<$Res>? get series {
+    if (_value.series == null) {
+      return null;
+    }
+
+    return $TvSeriesModelCopyWith<$Res>(_value.series!, (value) {
+      return _then(_value.copyWith(series: value) as $Val);
     });
   }
 }
@@ -110,12 +130,15 @@ abstract class _$$_FavoriteStateCopyWith<$Res>
   $Res call(
       {Status status,
       String? errorMessage,
-      AccountMovieModel? movies,
+      MovieModel? movies,
       Map<int, bool>? favoriteStatus,
-      bool? hasChanged});
+      bool? hasChanged,
+      TvSeriesModel? series});
 
   @override
-  $AccountMovieModelCopyWith<$Res>? get movies;
+  $MovieModelCopyWith<$Res>? get movies;
+  @override
+  $TvSeriesModelCopyWith<$Res>? get series;
 }
 
 /// @nodoc
@@ -134,6 +157,7 @@ class __$$_FavoriteStateCopyWithImpl<$Res>
     Object? movies = freezed,
     Object? favoriteStatus = freezed,
     Object? hasChanged = freezed,
+    Object? series = freezed,
   }) {
     return _then(_$_FavoriteState(
       status: null == status
@@ -147,7 +171,7 @@ class __$$_FavoriteStateCopyWithImpl<$Res>
       movies: freezed == movies
           ? _value.movies
           : movies // ignore: cast_nullable_to_non_nullable
-              as AccountMovieModel?,
+              as MovieModel?,
       favoriteStatus: freezed == favoriteStatus
           ? _value._favoriteStatus
           : favoriteStatus // ignore: cast_nullable_to_non_nullable
@@ -156,6 +180,10 @@ class __$$_FavoriteStateCopyWithImpl<$Res>
           ? _value.hasChanged
           : hasChanged // ignore: cast_nullable_to_non_nullable
               as bool?,
+      series: freezed == series
+          ? _value.series
+          : series // ignore: cast_nullable_to_non_nullable
+              as TvSeriesModel?,
     ));
   }
 }
@@ -168,7 +196,8 @@ class _$_FavoriteState implements _FavoriteState {
       this.errorMessage,
       this.movies,
       final Map<int, bool>? favoriteStatus,
-      this.hasChanged})
+      this.hasChanged,
+      this.series})
       : _favoriteStatus = favoriteStatus;
 
   @override
@@ -177,7 +206,7 @@ class _$_FavoriteState implements _FavoriteState {
   @override
   final String? errorMessage;
   @override
-  final AccountMovieModel? movies;
+  final MovieModel? movies;
   final Map<int, bool>? _favoriteStatus;
   @override
   Map<int, bool>? get favoriteStatus {
@@ -190,10 +219,12 @@ class _$_FavoriteState implements _FavoriteState {
 
   @override
   final bool? hasChanged;
+  @override
+  final TvSeriesModel? series;
 
   @override
   String toString() {
-    return 'FavoriteState(status: $status, errorMessage: $errorMessage, movies: $movies, favoriteStatus: $favoriteStatus, hasChanged: $hasChanged)';
+    return 'FavoriteState(status: $status, errorMessage: $errorMessage, movies: $movies, favoriteStatus: $favoriteStatus, hasChanged: $hasChanged, series: $series)';
   }
 
   @override
@@ -208,12 +239,13 @@ class _$_FavoriteState implements _FavoriteState {
             const DeepCollectionEquality()
                 .equals(other._favoriteStatus, _favoriteStatus) &&
             (identical(other.hasChanged, hasChanged) ||
-                other.hasChanged == hasChanged));
+                other.hasChanged == hasChanged) &&
+            (identical(other.series, series) || other.series == series));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, status, errorMessage, movies,
-      const DeepCollectionEquality().hash(_favoriteStatus), hasChanged);
+      const DeepCollectionEquality().hash(_favoriteStatus), hasChanged, series);
 
   @JsonKey(ignore: true)
   @override
@@ -226,20 +258,23 @@ abstract class _FavoriteState implements FavoriteState {
   const factory _FavoriteState(
       {final Status status,
       final String? errorMessage,
-      final AccountMovieModel? movies,
+      final MovieModel? movies,
       final Map<int, bool>? favoriteStatus,
-      final bool? hasChanged}) = _$_FavoriteState;
+      final bool? hasChanged,
+      final TvSeriesModel? series}) = _$_FavoriteState;
 
   @override
   Status get status;
   @override
   String? get errorMessage;
   @override
-  AccountMovieModel? get movies;
+  MovieModel? get movies;
   @override
   Map<int, bool>? get favoriteStatus;
   @override
   bool? get hasChanged;
+  @override
+  TvSeriesModel? get series;
   @override
   @JsonKey(ignore: true)
   _$$_FavoriteStateCopyWith<_$_FavoriteState> get copyWith =>

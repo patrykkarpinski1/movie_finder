@@ -5,7 +5,7 @@ part 'movie_model.g.dart';
 @freezed
 class MovieModel with _$MovieModel {
   factory MovieModel({
-    required List<Results> results,
+    required List<Results>? results,
   }) = _MovieModel;
 
   factory MovieModel.fromJson(Map<String, dynamic> json) =>

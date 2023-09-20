@@ -5,7 +5,7 @@ class WatchlistState with _$WatchlistState {
   const factory WatchlistState({
     @Default(Status.initial) Status status,
     String? errorMessage,
-    AccountMovieModel? movies,
+    MovieModel? movies,
     Map<int, bool>? watchlistStatus,
     bool? hasChanged,
   }) = _WatchlistState;

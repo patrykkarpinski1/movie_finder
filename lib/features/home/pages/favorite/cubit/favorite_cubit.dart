@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_finder/app/core/enums.dart';
-import 'package:movie_finder/models/account/account_movie_model.dart';
+import 'package:movie_finder/models/movie/movie_model.dart';
+import 'package:movie_finder/models/series/tv_series_model.dart';
 import 'package:movie_finder/repositories/account_repositories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -68,6 +69,61 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     } catch (error) {
       emit(
           state.copyWith(status: Status.error, errorMessage: error.toString()));
+    }
+  }
+
+  Future<void> addFavoriteSeries(
+    String mediaType,
+    int mediaId,
+    bool isFavorite,
+  ) async {
+    final sessionId = await _getSessionIdFromPrefs();
+    final accountId = await _getAccountIdFromPrefs();
+
+    if (sessionId != null && accountId != null) {
+      await accountRepository.addFavoriteSeries(
+          accountId, sessionId, mediaType, mediaId, isFavorite);
+
+      favoriteStatus[mediaId] = isFavorite;
+      emit(state.copyWith(favoriteStatus: favoriteStatus, hasChanged: true));
+      emit(state.copyWith(hasChanged: false));
+    }
+  }
+
+  Future<void> getFavoritesSeries() async {
+    emit(const FavoriteState(status: Status.loading));
+    final sessionId = await _getSessionIdFromPrefs();
+    final accountId = await _getAccountIdFromPrefs();
+
+    if (sessionId == null || accountId == null) {
+      return;
+    }
+
+    try {
+      final favoritesSeries =
+          await accountRepository.getFavoritesSeries(accountId, sessionId);
+
+      if (favoritesSeries != null && favoritesSeries.results != null) {
+        for (var movie in favoritesSeries.results!) {
+          favoriteStatus[movie.id] = true;
+        }
+      }
+
+      emit(state.copyWith(
+          status: Status.success,
+          series: favoritesSeries,
+          favoriteStatus: favoriteStatus));
+    } catch (error) {
+      emit(
+          state.copyWith(status: Status.error, errorMessage: error.toString()));
+    }
+  }
+
+  Future<void> getFavorites(MediaType type) async {
+    if (type == MediaType.movie) {
+      getFavoritesMovies();
+    } else {
+      getFavoritesSeries();
     }
   }
 }

@@ -20,7 +20,7 @@ TvSeriesModel _$TvSeriesModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TvSeriesModel {
-  List<Results> get results => throw _privateConstructorUsedError;
+  List<Results>? get results => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $TvSeriesModelCopyWith<$Res> {
           TvSeriesModel value, $Res Function(TvSeriesModel) then) =
       _$TvSeriesModelCopyWithImpl<$Res, TvSeriesModel>;
   @useResult
-  $Res call({List<Results> results});
+  $Res call({List<Results>? results});
 }
 
 /// @nodoc
@@ -50,13 +50,13 @@ class _$TvSeriesModelCopyWithImpl<$Res, $Val extends TvSeriesModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? results = null,
+    Object? results = freezed,
   }) {
     return _then(_value.copyWith(
-      results: null == results
+      results: freezed == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
-              as List<Results>,
+              as List<Results>?,
     ) as $Val);
   }
 }
@@ -69,7 +69,7 @@ abstract class _$$_TvSeriesModelCopyWith<$Res>
       __$$_TvSeriesModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Results> results});
+  $Res call({List<Results>? results});
 }
 
 /// @nodoc
@@ -83,13 +83,13 @@ class __$$_TvSeriesModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? results = null,
+    Object? results = freezed,
   }) {
     return _then(_$_TvSeriesModel(
-      results: null == results
+      results: freezed == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
-              as List<Results>,
+              as List<Results>?,
     ));
   }
 }
@@ -97,17 +97,20 @@ class __$$_TvSeriesModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_TvSeriesModel implements _TvSeriesModel {
-  _$_TvSeriesModel({required final List<Results> results}) : _results = results;
+  _$_TvSeriesModel({required final List<Results>? results})
+      : _results = results;
 
   factory _$_TvSeriesModel.fromJson(Map<String, dynamic> json) =>
       _$$_TvSeriesModelFromJson(json);
 
-  final List<Results> _results;
+  final List<Results>? _results;
   @override
-  List<Results> get results {
+  List<Results>? get results {
+    final value = _results;
+    if (value == null) return null;
     if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_results);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -143,14 +146,14 @@ class _$_TvSeriesModel implements _TvSeriesModel {
 }
 
 abstract class _TvSeriesModel implements TvSeriesModel {
-  factory _TvSeriesModel({required final List<Results> results}) =
+  factory _TvSeriesModel({required final List<Results>? results}) =
       _$_TvSeriesModel;
 
   factory _TvSeriesModel.fromJson(Map<String, dynamic> json) =
       _$_TvSeriesModel.fromJson;
 
   @override
-  List<Results> get results;
+  List<Results>? get results;
   @override
   @JsonKey(ignore: true)
   _$$_TvSeriesModelCopyWith<_$_TvSeriesModel> get copyWith =>

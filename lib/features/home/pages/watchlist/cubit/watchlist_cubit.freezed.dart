@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WatchlistState {
   Status get status => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
-  AccountMovieModel? get movies => throw _privateConstructorUsedError;
+  MovieModel? get movies => throw _privateConstructorUsedError;
   Map<int, bool>? get watchlistStatus => throw _privateConstructorUsedError;
   bool? get hasChanged => throw _privateConstructorUsedError;
 
@@ -36,11 +36,11 @@ abstract class $WatchlistStateCopyWith<$Res> {
   $Res call(
       {Status status,
       String? errorMessage,
-      AccountMovieModel? movies,
+      MovieModel? movies,
       Map<int, bool>? watchlistStatus,
       bool? hasChanged});
 
-  $AccountMovieModelCopyWith<$Res>? get movies;
+  $MovieModelCopyWith<$Res>? get movies;
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ class _$WatchlistStateCopyWithImpl<$Res, $Val extends WatchlistState>
       movies: freezed == movies
           ? _value.movies
           : movies // ignore: cast_nullable_to_non_nullable
-              as AccountMovieModel?,
+              as MovieModel?,
       watchlistStatus: freezed == watchlistStatus
           ? _value.watchlistStatus
           : watchlistStatus // ignore: cast_nullable_to_non_nullable
@@ -88,12 +88,12 @@ class _$WatchlistStateCopyWithImpl<$Res, $Val extends WatchlistState>
 
   @override
   @pragma('vm:prefer-inline')
-  $AccountMovieModelCopyWith<$Res>? get movies {
+  $MovieModelCopyWith<$Res>? get movies {
     if (_value.movies == null) {
       return null;
     }
 
-    return $AccountMovieModelCopyWith<$Res>(_value.movies!, (value) {
+    return $MovieModelCopyWith<$Res>(_value.movies!, (value) {
       return _then(_value.copyWith(movies: value) as $Val);
     });
   }
@@ -110,12 +110,12 @@ abstract class _$$_WatchlistStateCopyWith<$Res>
   $Res call(
       {Status status,
       String? errorMessage,
-      AccountMovieModel? movies,
+      MovieModel? movies,
       Map<int, bool>? watchlistStatus,
       bool? hasChanged});
 
   @override
-  $AccountMovieModelCopyWith<$Res>? get movies;
+  $MovieModelCopyWith<$Res>? get movies;
 }
 
 /// @nodoc
@@ -147,7 +147,7 @@ class __$$_WatchlistStateCopyWithImpl<$Res>
       movies: freezed == movies
           ? _value.movies
           : movies // ignore: cast_nullable_to_non_nullable
-              as AccountMovieModel?,
+              as MovieModel?,
       watchlistStatus: freezed == watchlistStatus
           ? _value._watchlistStatus
           : watchlistStatus // ignore: cast_nullable_to_non_nullable
@@ -177,7 +177,7 @@ class _$_WatchlistState implements _WatchlistState {
   @override
   final String? errorMessage;
   @override
-  final AccountMovieModel? movies;
+  final MovieModel? movies;
   final Map<int, bool>? _watchlistStatus;
   @override
   Map<int, bool>? get watchlistStatus {
@@ -226,7 +226,7 @@ abstract class _WatchlistState implements WatchlistState {
   const factory _WatchlistState(
       {final Status status,
       final String? errorMessage,
-      final AccountMovieModel? movies,
+      final MovieModel? movies,
       final Map<int, bool>? watchlistStatus,
       final bool? hasChanged}) = _$_WatchlistState;
 
@@ -235,7 +235,7 @@ abstract class _WatchlistState implements WatchlistState {
   @override
   String? get errorMessage;
   @override
-  AccountMovieModel? get movies;
+  MovieModel? get movies;
   @override
   Map<int, bool>? get watchlistStatus;
   @override

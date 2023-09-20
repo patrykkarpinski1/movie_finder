@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_finder/app/core/enums.dart';
-import 'package:movie_finder/models/account/account_movie_model.dart';
+import 'package:movie_finder/models/movie/movie_model.dart';
 import 'package:movie_finder/repositories/account_repositories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

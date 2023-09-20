@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_finder/models/account/account_movie_model.dart';
 import 'package:movie_finder/models/account/auth_model.dart';
+import 'package:movie_finder/models/movie/movie_model.dart';
+import 'package:movie_finder/models/series/tv_series_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'account_data_source.g.dart';
@@ -30,22 +31,32 @@ abstract class AccountRemoteRetrofitDataSource {
   Future<AuthModel> getAccountDetails(@Query('session_id') String sessionId);
 
   @POST('account/{accountId}/favorite')
-  Future<AccountMovieModel> addFavoriteMovie(
+  Future<MovieModel> addFavoriteMovie(
       @Path('accountId') int accountId,
       @Query('session_id') String sessionId,
       @Body() Map<String, dynamic> favoriteData);
 
   @GET('account/{accountId}/favorite/movies')
-  Future<AccountMovieModel> getFavoritesMovies(
+  Future<MovieModel> getFavoritesMovies(
       @Path('accountId') int accountId, @Query('session_id') String sessionId);
 
   @POST('account/{accountId}/watchlist')
-  Future<AccountMovieModel> addToWatchlistMovie(
+  Future<MovieModel> addToWatchlistMovie(
       @Path('accountId') int accountId,
       @Query('session_id') String sessionId,
       @Body() Map<String, dynamic> watchlistData);
 
   @GET('account/{accountId}/watchlist/movies')
-  Future<AccountMovieModel> getWatchlistMovies(
+  Future<MovieModel> getWatchlistMovies(
+      @Path('accountId') int accountId, @Query('session_id') String sessionId);
+
+  @POST('account/{accountId}/favorite')
+  Future<TvSeriesModel> addFavoriteSeries(
+      @Path('accountId') int accountId,
+      @Query('session_id') String sessionId,
+      @Body() Map<String, dynamic> favoriteData);
+
+  @GET('account/{accountId}/favorite/tv')
+  Future<TvSeriesModel> getFavoritesSeries(
       @Path('accountId') int accountId, @Query('session_id') String sessionId);
 }

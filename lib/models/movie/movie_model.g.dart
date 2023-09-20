@@ -8,8 +8,8 @@ part of 'movie_model.dart';
 
 _$_MovieModel _$$_MovieModelFromJson(Map<String, dynamic> json) =>
     _$_MovieModel(
-      results: (json['results'] as List<dynamic>)
-          .map((e) => Results.fromJson(e as Map<String, dynamic>))
+      results: (json['results'] as List<dynamic>?)
+          ?.map((e) => Results.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

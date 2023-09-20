@@ -20,7 +20,7 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovieModel {
-  List<Results> get results => throw _privateConstructorUsedError;
+  List<Results>? get results => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $MovieModelCopyWith<$Res> {
           MovieModel value, $Res Function(MovieModel) then) =
       _$MovieModelCopyWithImpl<$Res, MovieModel>;
   @useResult
-  $Res call({List<Results> results});
+  $Res call({List<Results>? results});
 }
 
 /// @nodoc
@@ -50,13 +50,13 @@ class _$MovieModelCopyWithImpl<$Res, $Val extends MovieModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? results = null,
+    Object? results = freezed,
   }) {
     return _then(_value.copyWith(
-      results: null == results
+      results: freezed == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
-              as List<Results>,
+              as List<Results>?,
     ) as $Val);
   }
 }
@@ -69,7 +69,7 @@ abstract class _$$_MovieModelCopyWith<$Res>
       __$$_MovieModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Results> results});
+  $Res call({List<Results>? results});
 }
 
 /// @nodoc
@@ -83,13 +83,13 @@ class __$$_MovieModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? results = null,
+    Object? results = freezed,
   }) {
     return _then(_$_MovieModel(
-      results: null == results
+      results: freezed == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
-              as List<Results>,
+              as List<Results>?,
     ));
   }
 }
@@ -97,17 +97,19 @@ class __$$_MovieModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_MovieModel implements _MovieModel {
-  _$_MovieModel({required final List<Results> results}) : _results = results;
+  _$_MovieModel({required final List<Results>? results}) : _results = results;
 
   factory _$_MovieModel.fromJson(Map<String, dynamic> json) =>
       _$$_MovieModelFromJson(json);
 
-  final List<Results> _results;
+  final List<Results>? _results;
   @override
-  List<Results> get results {
+  List<Results>? get results {
+    final value = _results;
+    if (value == null) return null;
     if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_results);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -143,13 +145,13 @@ class _$_MovieModel implements _MovieModel {
 }
 
 abstract class _MovieModel implements MovieModel {
-  factory _MovieModel({required final List<Results> results}) = _$_MovieModel;
+  factory _MovieModel({required final List<Results>? results}) = _$_MovieModel;
 
   factory _MovieModel.fromJson(Map<String, dynamic> json) =
       _$_MovieModel.fromJson;
 
   @override
-  List<Results> get results;
+  List<Results>? get results;
   @override
   @JsonKey(ignore: true)
   _$$_MovieModelCopyWith<_$_MovieModel> get copyWith =>

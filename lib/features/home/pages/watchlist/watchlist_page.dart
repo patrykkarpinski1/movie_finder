@@ -30,12 +30,12 @@ class WatchlistPage extends StatelessWidget {
             );
           }
           if (state.status == Status.success && state.movies != null) {
-            final accountMovieModel = state.movies!;
+            final movieModel = state.movies!;
             return Material(
               child: ListView.builder(
-                itemCount: accountMovieModel.results!.length,
+                itemCount: movieModel.results!.length,
                 itemBuilder: (context, index) {
-                  final movie = accountMovieModel.results![index];
+                  final movie = movieModel.results![index];
                   return ListTile(title: Text(movie.title ?? 'Unknown title'));
                 },
               ),

@@ -1,6 +1,7 @@
 import 'package:movie_finder/data/account_data_source.dart';
-import 'package:movie_finder/models/account/account_movie_model.dart';
 import 'package:movie_finder/models/account/auth_model.dart';
+import 'package:movie_finder/models/movie/movie_model.dart';
+import 'package:movie_finder/models/series/tv_series_model.dart';
 
 class AccountRepository {
   AccountRepository(this.accountDataSource);
@@ -41,19 +42,19 @@ class AccountRepository {
     return accountDataSource.getAccountDetails(sessionId);
   }
 
-  Future<AccountMovieModel?> addFavoriteMovie(int accountId, String sessionId,
+  Future<MovieModel?> addFavoriteMovie(int accountId, String sessionId,
       String mediaType, int mediaId, bool isFavorite) async {
     return accountDataSource.addFavoriteMovie(accountId, sessionId,
         {"media_type": mediaType, "media_id": mediaId, "favorite": isFavorite});
   }
 
-  Future<AccountMovieModel?> getFavoritesMovies(
+  Future<MovieModel?> getFavoritesMovies(
       int accountId, String sessionId) async {
     return accountDataSource.getFavoritesMovies(accountId, sessionId);
   }
 
-  Future<AccountMovieModel?> addToWatchlistMovie(int accountId,
-      String sessionId, String mediaType, int mediaId, bool isWatchlist) async {
+  Future<MovieModel?> addToWatchlistMovie(int accountId, String sessionId,
+      String mediaType, int mediaId, bool isWatchlist) async {
     return accountDataSource.addToWatchlistMovie(accountId, sessionId, {
       "media_type": mediaType,
       "media_id": mediaId,
@@ -61,8 +62,19 @@ class AccountRepository {
     });
   }
 
-  Future<AccountMovieModel?> getWatchlistMovies(
+  Future<MovieModel?> getWatchlistMovies(
       int accountId, String sessionId) async {
     return accountDataSource.getWatchlistMovies(accountId, sessionId);
+  }
+
+  Future<TvSeriesModel?> addFavoriteSeries(int accountId, String sessionId,
+      String mediaType, int mediaId, bool isFavorite) async {
+    return accountDataSource.addFavoriteSeries(accountId, sessionId,
+        {"media_type": mediaType, "media_id": mediaId, "favorite": isFavorite});
+  }
+
+  Future<TvSeriesModel?> getFavoritesSeries(
+      int accountId, String sessionId) async {
+    return accountDataSource.getFavoritesSeries(accountId, sessionId);
   }
 }

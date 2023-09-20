@@ -8,8 +8,8 @@ part of 'tv_series_model.dart';
 
 _$_TvSeriesModel _$$_TvSeriesModelFromJson(Map<String, dynamic> json) =>
     _$_TvSeriesModel(
-      results: (json['results'] as List<dynamic>)
-          .map((e) => Results.fromJson(e as Map<String, dynamic>))
+      results: (json['results'] as List<dynamic>?)
+          ?.map((e) => Results.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

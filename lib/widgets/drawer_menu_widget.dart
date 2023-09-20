@@ -4,6 +4,9 @@ import 'package:movie_finder/auth/auth_page.dart';
 import 'package:movie_finder/auth/cubit/auth_cubit.dart';
 import 'package:movie_finder/features/home/pages/favorite/favorite_page.dart';
 import 'package:movie_finder/features/home/pages/watchlist/watchlist_page.dart';
+import 'package:movie_finder/app/core/enums.dart';
+import 'package:movie_finder/app/injection_container.dart';
+import 'package:movie_finder/features/home/pages/favorite/cubit/favorite_cubit.dart';
 
 class DrawerMenuWidget extends StatelessWidget {
   const DrawerMenuWidget({
@@ -43,8 +46,13 @@ class DrawerMenuWidget extends StatelessWidget {
               icon: Icons.favorite_border,
               text: 'FAVORITE',
               onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const FavoritePage()));
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => BlocProvider<FavoriteCubit>(
+                    create: (context) =>
+                        getIt<FavoriteCubit>()..getFavorites(MediaType.movie),
+                    child: const FavoritePage(),
+                  ),
+                ));
               }),
           _buildMenuItem(
               icon: Icons.playlist_add,

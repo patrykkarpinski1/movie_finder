@@ -137,7 +137,7 @@ class _AccountRemoteRetrofitDataSource
   }
 
   @override
-  Future<AccountMovieModel> addFavoriteMovie(
+  Future<MovieModel> addFavoriteMovie(
     int accountId,
     String sessionId,
     Map<String, dynamic> favoriteData,
@@ -148,7 +148,7 @@ class _AccountRemoteRetrofitDataSource
     final _data = <String, dynamic>{};
     _data.addAll(favoriteData);
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AccountMovieModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<MovieModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -160,12 +160,12 @@ class _AccountRemoteRetrofitDataSource
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AccountMovieModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<AccountMovieModel> getFavoritesMovies(
+  Future<MovieModel> getFavoritesMovies(
     int accountId,
     String sessionId,
   ) async {
@@ -174,7 +174,7 @@ class _AccountRemoteRetrofitDataSource
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AccountMovieModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<MovieModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -186,12 +186,12 @@ class _AccountRemoteRetrofitDataSource
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AccountMovieModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<AccountMovieModel> addToWatchlistMovie(
+  Future<MovieModel> addToWatchlistMovie(
     int accountId,
     String sessionId,
     Map<String, dynamic> watchlistData,
@@ -202,7 +202,7 @@ class _AccountRemoteRetrofitDataSource
     final _data = <String, dynamic>{};
     _data.addAll(watchlistData);
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AccountMovieModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<MovieModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -214,12 +214,12 @@ class _AccountRemoteRetrofitDataSource
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AccountMovieModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<AccountMovieModel> getWatchlistMovies(
+  Future<MovieModel> getWatchlistMovies(
     int accountId,
     String sessionId,
   ) async {
@@ -228,7 +228,7 @@ class _AccountRemoteRetrofitDataSource
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AccountMovieModel>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<MovieModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -240,7 +240,61 @@ class _AccountRemoteRetrofitDataSource
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AccountMovieModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<TvSeriesModel> addFavoriteSeries(
+    int accountId,
+    String sessionId,
+    Map<String, dynamic> favoriteData,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'session_id': sessionId};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(favoriteData);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<TvSeriesModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'account/${accountId}/favorite',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TvSeriesModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<TvSeriesModel> getFavoritesSeries(
+    int accountId,
+    String sessionId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'session_id': sessionId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<TvSeriesModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'account/${accountId}/favorite/tv',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TvSeriesModel.fromJson(_result.data!);
     return value;
   }
 
