@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_finder/models/series/tv_series_model.dart';
 
-class FavoriteSeriesWidget extends StatelessWidget {
-  const FavoriteSeriesWidget({
+class SeriesWidget extends StatelessWidget {
+  const SeriesWidget({
     super.key,
     required this.seriesModel,
   });

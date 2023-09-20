@@ -4,6 +4,7 @@ import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/app/injection_container.dart';
 import 'package:movie_finder/features/details/cubit/details_cubit.dart';
 import 'package:movie_finder/features/home/pages/favorite/cubit/favorite_cubit.dart';
+import 'package:movie_finder/features/home/pages/watchlist/cubit/watchlist_cubit.dart';
 import 'package:movie_finder/models/details/details_series_model.dart';
 import 'package:movie_finder/widgets/details/details_series_widget.dart';
 
@@ -21,6 +22,9 @@ class DetailsSeriesPage extends StatelessWidget {
         ),
         BlocProvider<FavoriteCubit>(
           create: (context) => getIt()..getFavoritesSeries(),
+        ),
+        BlocProvider<WatchlistCubit>(
+          create: (context) => getIt()..getWatchlistSeries(),
         ),
       ],
       child: BlocConsumer<DetailsCubit, DetailsState>(
@@ -97,13 +101,44 @@ class DetailsSeriesPage extends StatelessWidget {
                           );
                         },
                       ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.playlist_add,
-                          size: 36,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {},
+                      BlocConsumer<WatchlistCubit, WatchlistState>(
+                        listener: (context, state) {
+                          if (state.hasChanged == true) {
+                            if (state.watchlistStatus?[id] == true) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Added to watchlist!'),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Removed to watchlist!'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        builder: (context, state) {
+                          final isWatchlist =
+                              state.watchlistStatus?[id] ?? false;
+                          return IconButton(
+                            icon: Icon(
+                              isWatchlist
+                                  ? Icons.playlist_add_check
+                                  : Icons.playlist_add,
+                              size: 36,
+                              color: isWatchlist ? Colors.yellow : Colors.white,
+                            ),
+                            onPressed: () {
+                              final cubit = context.read<WatchlistCubit>();
+                              cubit.addToWatchlistSeries(
+                                  "tv", id, !isWatchlist);
+                            },
+                          );
+                        },
                       ),
                       IconButton(
                         icon: const Icon(

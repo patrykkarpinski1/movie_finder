@@ -77,4 +77,18 @@ class AccountRepository {
       int accountId, String sessionId) async {
     return accountDataSource.getFavoritesSeries(accountId, sessionId);
   }
+
+  Future<TvSeriesModel?> addToWatchlistSeries(int accountId, String sessionId,
+      String mediaType, int mediaId, bool isWatchlist) async {
+    return accountDataSource.addToWatchlistSeries(accountId, sessionId, {
+      "media_type": mediaType,
+      "media_id": mediaId,
+      "watchlist": isWatchlist
+    });
+  }
+
+  Future<TvSeriesModel?> getWatchlistSeries(
+      int accountId, String sessionId) async {
+    return accountDataSource.getWatchlistSeries(accountId, sessionId);
+  }
 }

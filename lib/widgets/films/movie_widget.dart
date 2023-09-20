@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_finder/models/movie/movie_model.dart';
 
-class FavoriteMovieWidget extends StatelessWidget {
-  const FavoriteMovieWidget({
+class MovieWidget extends StatelessWidget {
+  const MovieWidget({
     super.key,
     required this.movieModel,
   });

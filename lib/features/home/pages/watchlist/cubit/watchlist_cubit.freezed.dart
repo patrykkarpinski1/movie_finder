@@ -21,6 +21,7 @@ mixin _$WatchlistState {
   MovieModel? get movies => throw _privateConstructorUsedError;
   Map<int, bool>? get watchlistStatus => throw _privateConstructorUsedError;
   bool? get hasChanged => throw _privateConstructorUsedError;
+  TvSeriesModel? get series => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $WatchlistStateCopyWith<WatchlistState> get copyWith =>
@@ -38,9 +39,11 @@ abstract class $WatchlistStateCopyWith<$Res> {
       String? errorMessage,
       MovieModel? movies,
       Map<int, bool>? watchlistStatus,
-      bool? hasChanged});
+      bool? hasChanged,
+      TvSeriesModel? series});
 
   $MovieModelCopyWith<$Res>? get movies;
+  $TvSeriesModelCopyWith<$Res>? get series;
 }
 
 /// @nodoc
@@ -61,6 +64,7 @@ class _$WatchlistStateCopyWithImpl<$Res, $Val extends WatchlistState>
     Object? movies = freezed,
     Object? watchlistStatus = freezed,
     Object? hasChanged = freezed,
+    Object? series = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -83,6 +87,10 @@ class _$WatchlistStateCopyWithImpl<$Res, $Val extends WatchlistState>
           ? _value.hasChanged
           : hasChanged // ignore: cast_nullable_to_non_nullable
               as bool?,
+      series: freezed == series
+          ? _value.series
+          : series // ignore: cast_nullable_to_non_nullable
+              as TvSeriesModel?,
     ) as $Val);
   }
 
@@ -95,6 +103,18 @@ class _$WatchlistStateCopyWithImpl<$Res, $Val extends WatchlistState>
 
     return $MovieModelCopyWith<$Res>(_value.movies!, (value) {
       return _then(_value.copyWith(movies: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TvSeriesModelCopyWith<$Res>? get series {
+    if (_value.series == null) {
+      return null;
+    }
+
+    return $TvSeriesModelCopyWith<$Res>(_value.series!, (value) {
+      return _then(_value.copyWith(series: value) as $Val);
     });
   }
 }
@@ -112,10 +132,13 @@ abstract class _$$_WatchlistStateCopyWith<$Res>
       String? errorMessage,
       MovieModel? movies,
       Map<int, bool>? watchlistStatus,
-      bool? hasChanged});
+      bool? hasChanged,
+      TvSeriesModel? series});
 
   @override
   $MovieModelCopyWith<$Res>? get movies;
+  @override
+  $TvSeriesModelCopyWith<$Res>? get series;
 }
 
 /// @nodoc
@@ -134,6 +157,7 @@ class __$$_WatchlistStateCopyWithImpl<$Res>
     Object? movies = freezed,
     Object? watchlistStatus = freezed,
     Object? hasChanged = freezed,
+    Object? series = freezed,
   }) {
     return _then(_$_WatchlistState(
       status: null == status
@@ -156,6 +180,10 @@ class __$$_WatchlistStateCopyWithImpl<$Res>
           ? _value.hasChanged
           : hasChanged // ignore: cast_nullable_to_non_nullable
               as bool?,
+      series: freezed == series
+          ? _value.series
+          : series // ignore: cast_nullable_to_non_nullable
+              as TvSeriesModel?,
     ));
   }
 }
@@ -168,7 +196,8 @@ class _$_WatchlistState implements _WatchlistState {
       this.errorMessage,
       this.movies,
       final Map<int, bool>? watchlistStatus,
-      this.hasChanged})
+      this.hasChanged,
+      this.series})
       : _watchlistStatus = watchlistStatus;
 
   @override
@@ -190,10 +219,12 @@ class _$_WatchlistState implements _WatchlistState {
 
   @override
   final bool? hasChanged;
+  @override
+  final TvSeriesModel? series;
 
   @override
   String toString() {
-    return 'WatchlistState(status: $status, errorMessage: $errorMessage, movies: $movies, watchlistStatus: $watchlistStatus, hasChanged: $hasChanged)';
+    return 'WatchlistState(status: $status, errorMessage: $errorMessage, movies: $movies, watchlistStatus: $watchlistStatus, hasChanged: $hasChanged, series: $series)';
   }
 
   @override
@@ -208,12 +239,19 @@ class _$_WatchlistState implements _WatchlistState {
             const DeepCollectionEquality()
                 .equals(other._watchlistStatus, _watchlistStatus) &&
             (identical(other.hasChanged, hasChanged) ||
-                other.hasChanged == hasChanged));
+                other.hasChanged == hasChanged) &&
+            (identical(other.series, series) || other.series == series));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, errorMessage, movies,
-      const DeepCollectionEquality().hash(_watchlistStatus), hasChanged);
+  int get hashCode => Object.hash(
+      runtimeType,
+      status,
+      errorMessage,
+      movies,
+      const DeepCollectionEquality().hash(_watchlistStatus),
+      hasChanged,
+      series);
 
   @JsonKey(ignore: true)
   @override
@@ -228,7 +266,8 @@ abstract class _WatchlistState implements WatchlistState {
       final String? errorMessage,
       final MovieModel? movies,
       final Map<int, bool>? watchlistStatus,
-      final bool? hasChanged}) = _$_WatchlistState;
+      final bool? hasChanged,
+      final TvSeriesModel? series}) = _$_WatchlistState;
 
   @override
   Status get status;
@@ -240,6 +279,8 @@ abstract class _WatchlistState implements WatchlistState {
   Map<int, bool>? get watchlistStatus;
   @override
   bool? get hasChanged;
+  @override
+  TvSeriesModel? get series;
   @override
   @JsonKey(ignore: true)
   _$$_WatchlistStateCopyWith<_$_WatchlistState> get copyWith =>

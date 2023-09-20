@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/features/home/pages/favorite/cubit/favorite_cubit.dart';
-import 'package:movie_finder/widgets/films/favorite_movie_widget.dart';
-import 'package:movie_finder/widgets/series/favorite_series_widget.dart';
+import 'package:movie_finder/widgets/films/movie_widget.dart';
+import 'package:movie_finder/widgets/series/series_widget.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -13,7 +13,7 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  FavoriteType _selectedFavorite = FavoriteType.movies;
+  MediaType _selectedFavorite = MediaType.movie;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _FavoritePageState extends State<FavoritePage> {
             onPressed: () {
               context.read<FavoriteCubit>().getFavorites(MediaType.movie);
               setState(() {
-                _selectedFavorite = FavoriteType.movies;
+                _selectedFavorite = MediaType.movie;
               });
             },
           ),
@@ -34,7 +34,7 @@ class _FavoritePageState extends State<FavoritePage> {
             onPressed: () {
               context.read<FavoriteCubit>().getFavorites(MediaType.series);
               setState(() {
-                _selectedFavorite = FavoriteType.series;
+                _selectedFavorite = MediaType.series;
               });
             },
           ),
@@ -56,15 +56,15 @@ class _FavoritePageState extends State<FavoritePage> {
           if (state.status == Status.loading) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (_selectedFavorite == FavoriteType.movies) {
+          if (_selectedFavorite == MediaType.movie) {
             if (state.status == Status.success && state.movies != null) {
               final movieModel = state.movies!;
-              return FavoriteMovieWidget(movieModel: movieModel);
+              return MovieWidget(movieModel: movieModel);
             }
-          } else if (_selectedFavorite == FavoriteType.series) {
+          } else if (_selectedFavorite == MediaType.series) {
             if (state.status == Status.success && state.series != null) {
               final seriesModel = state.series!;
-              return FavoriteSeriesWidget(seriesModel: seriesModel);
+              return SeriesWidget(seriesModel: seriesModel);
             }
           }
           return const Center(

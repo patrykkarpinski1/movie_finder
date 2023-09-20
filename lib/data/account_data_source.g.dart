@@ -298,6 +298,60 @@ class _AccountRemoteRetrofitDataSource
     return value;
   }
 
+  @override
+  Future<TvSeriesModel> addToWatchlistSeries(
+    int accountId,
+    String sessionId,
+    Map<String, dynamic> watchlistData,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'session_id': sessionId};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(watchlistData);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<TvSeriesModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'account/${accountId}/watchlist',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TvSeriesModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<TvSeriesModel> getWatchlistSeries(
+    int accountId,
+    String sessionId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'session_id': sessionId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<TvSeriesModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'account/${accountId}/watchlist/tv',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TvSeriesModel.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
