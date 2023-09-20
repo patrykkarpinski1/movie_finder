@@ -18,9 +18,10 @@ class _WatchlistPageState extends State<WatchlistPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         actions: [
           IconButton(
-            icon: const Icon(Icons.movie),
+            icon: const Icon(Icons.local_movies),
             onPressed: () {
               context.read<WatchlistCubit>().getWatchlist(MediaType.movie);
               setState(() {
@@ -29,7 +30,7 @@ class _WatchlistPageState extends State<WatchlistPage> {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.tv),
+            icon: const Icon(Icons.tv_sharp),
             onPressed: () {
               context.read<WatchlistCubit>().getWatchlist(MediaType.series);
               setState(() {

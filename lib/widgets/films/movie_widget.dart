@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_finder/features/details/details_film_page.dart';
 import 'package:movie_finder/models/movie/movie_model.dart';
 
 class MovieWidget extends StatelessWidget {
@@ -12,12 +13,78 @@ class MovieWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: ListView.builder(
-        itemCount: movieModel.results!.length,
-        itemBuilder: (context, index) {
-          final movie = movieModel.results![index];
-          return ListTile(title: Text(movie.title ?? 'Unknown title'));
-        },
+      color: Colors.black,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          itemCount: movieModel.results!.length,
+          itemBuilder: (context, index) {
+            final movie = movieModel.results![index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => DetailsFilmPage(
+                            id: movie.id,
+                          )));
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        movie.title ?? 'download error',
+                        maxLines: 3,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          shadows: [
+                            Shadow(
+                              color: Colors.black45,
+                              blurRadius: 4.0,
+                              offset: Offset(2.0, 2.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black38,
+                            blurRadius: 6.0,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16.0),
+                        child: movie.backdropPath != null
+                            ? FadeInImage(
+                                placeholder:
+                                    const AssetImage('images/load.png'),
+                                image: NetworkImage(
+                                    'https://www.themoviedb.org/t/p/w500${movie.backdropPath}'),
+                                fit: BoxFit.cover,
+                              )
+                            : const Image(
+                                image: AssetImage('images/film.png'),
+                                fit: BoxFit.cover,
+                              ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

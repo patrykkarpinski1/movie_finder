@@ -19,9 +19,10 @@ class _FavoritePageState extends State<FavoritePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         actions: [
           IconButton(
-            icon: const Icon(Icons.movie),
+            icon: const Icon(Icons.local_movies),
             onPressed: () {
               context.read<FavoriteCubit>().getFavorites(MediaType.movie);
               setState(() {
@@ -30,7 +31,7 @@ class _FavoritePageState extends State<FavoritePage> {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.tv),
+            icon: const Icon(Icons.tv_sharp),
             onPressed: () {
               context.read<FavoriteCubit>().getFavorites(MediaType.series);
               setState(() {
