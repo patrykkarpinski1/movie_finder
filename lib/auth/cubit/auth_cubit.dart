@@ -16,10 +16,18 @@ class AuthCubit extends Cubit<AuthState> {
       {required String username, required String password}) async {
     try {
       emit(const AuthState(status: Status.loading));
-      String sessionId = await accountRepository.loginUser(username, password);
 
+      String sessionId = await accountRepository.loginUser(username, password);
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('sessionId', sessionId);
+
+      AuthModel? accountDetails =
+          await accountRepository.getAccountDetails(sessionId);
+      if (accountDetails != null) {
+        await prefs.setInt('accountId', accountDetails.accountId!);
+      } else {
+        throw Exception("Failed to retrieve account details.");
+      }
 
       emit(state.copyWith(status: Status.authenticated));
     } catch (error) {
@@ -50,9 +58,10 @@ class AuthCubit extends Cubit<AuthState> {
             errorMessage: "Session ID not found", status: Status.error));
       }
 
-      await accountRepository.deleteSession(sessionId!);
+      await accountRepository.deleteSession(sessionId ?? '');
 
       await prefs.remove('sessionId');
+      await prefs.remove('accountId');
 
       emit(state.copyWith(status: Status.unauthenticated));
     } catch (error) {

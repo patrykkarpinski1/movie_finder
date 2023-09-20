@@ -8,7 +8,6 @@ part of 'movie_model.dart';
 
 _$_MovieModel _$$_MovieModelFromJson(Map<String, dynamic> json) =>
     _$_MovieModel(
-      page: json['page'] as int,
       results: (json['results'] as List<dynamic>)
           .map((e) => Results.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -16,7 +15,6 @@ _$_MovieModel _$$_MovieModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_MovieModelToJson(_$_MovieModel instance) =>
     <String, dynamic>{
-      'page': instance.page,
       'results': instance.results,
     };
 

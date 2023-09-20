@@ -30,12 +30,14 @@ class HomeCubit extends Cubit<HomeState> {
         ),
       );
     } catch (error) {
-      emit(
-        state.copyWith(
-          status: Status.error,
-          errorMessage: error.toString(),
-        ),
-      );
+      if (!isClosed) {
+        emit(
+          state.copyWith(
+            status: Status.error,
+            errorMessage: error.toString(),
+          ),
+        );
+      }
     }
   }
 }

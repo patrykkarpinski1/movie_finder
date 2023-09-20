@@ -22,6 +22,7 @@ AuthModel _$AuthModelFromJson(Map<String, dynamic> json) {
 mixin _$AuthModel {
   String? get sessionId => throw _privateConstructorUsedError;
   String? get requestToken => throw _privateConstructorUsedError;
+  int? get accountId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $AuthModelCopyWith<$Res> {
   factory $AuthModelCopyWith(AuthModel value, $Res Function(AuthModel) then) =
       _$AuthModelCopyWithImpl<$Res, AuthModel>;
   @useResult
-  $Res call({String? sessionId, String? requestToken});
+  $Res call({String? sessionId, String? requestToken, int? accountId});
 }
 
 /// @nodoc
@@ -52,6 +53,7 @@ class _$AuthModelCopyWithImpl<$Res, $Val extends AuthModel>
   $Res call({
     Object? sessionId = freezed,
     Object? requestToken = freezed,
+    Object? accountId = freezed,
   }) {
     return _then(_value.copyWith(
       sessionId: freezed == sessionId
@@ -62,6 +64,10 @@ class _$AuthModelCopyWithImpl<$Res, $Val extends AuthModel>
           ? _value.requestToken
           : requestToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      accountId: freezed == accountId
+          ? _value.accountId
+          : accountId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -73,7 +79,7 @@ abstract class _$$_AuthModelCopyWith<$Res> implements $AuthModelCopyWith<$Res> {
       __$$_AuthModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? sessionId, String? requestToken});
+  $Res call({String? sessionId, String? requestToken, int? accountId});
 }
 
 /// @nodoc
@@ -89,6 +95,7 @@ class __$$_AuthModelCopyWithImpl<$Res>
   $Res call({
     Object? sessionId = freezed,
     Object? requestToken = freezed,
+    Object? accountId = freezed,
   }) {
     return _then(_$_AuthModel(
       sessionId: freezed == sessionId
@@ -99,6 +106,10 @@ class __$$_AuthModelCopyWithImpl<$Res>
           ? _value.requestToken
           : requestToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      accountId: freezed == accountId
+          ? _value.accountId
+          : accountId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -106,7 +117,7 @@ class __$$_AuthModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_AuthModel implements _AuthModel {
-  _$_AuthModel({this.sessionId, this.requestToken});
+  _$_AuthModel({this.sessionId, this.requestToken, this.accountId});
 
   factory _$_AuthModel.fromJson(Map<String, dynamic> json) =>
       _$$_AuthModelFromJson(json);
@@ -115,10 +126,12 @@ class _$_AuthModel implements _AuthModel {
   final String? sessionId;
   @override
   final String? requestToken;
+  @override
+  final int? accountId;
 
   @override
   String toString() {
-    return 'AuthModel(sessionId: $sessionId, requestToken: $requestToken)';
+    return 'AuthModel(sessionId: $sessionId, requestToken: $requestToken, accountId: $accountId)';
   }
 
   @override
@@ -129,12 +142,15 @@ class _$_AuthModel implements _AuthModel {
             (identical(other.sessionId, sessionId) ||
                 other.sessionId == sessionId) &&
             (identical(other.requestToken, requestToken) ||
-                other.requestToken == requestToken));
+                other.requestToken == requestToken) &&
+            (identical(other.accountId, accountId) ||
+                other.accountId == accountId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, sessionId, requestToken);
+  int get hashCode =>
+      Object.hash(runtimeType, sessionId, requestToken, accountId);
 
   @JsonKey(ignore: true)
   @override
@@ -151,8 +167,10 @@ class _$_AuthModel implements _AuthModel {
 }
 
 abstract class _AuthModel implements AuthModel {
-  factory _AuthModel({final String? sessionId, final String? requestToken}) =
-      _$_AuthModel;
+  factory _AuthModel(
+      {final String? sessionId,
+      final String? requestToken,
+      final int? accountId}) = _$_AuthModel;
 
   factory _AuthModel.fromJson(Map<String, dynamic> json) =
       _$_AuthModel.fromJson;
@@ -161,6 +179,8 @@ abstract class _AuthModel implements AuthModel {
   String? get sessionId;
   @override
   String? get requestToken;
+  @override
+  int? get accountId;
   @override
   @JsonKey(ignore: true)
   _$$_AuthModelCopyWith<_$_AuthModel> get copyWith =>

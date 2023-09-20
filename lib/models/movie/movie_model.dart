@@ -5,7 +5,6 @@ part 'movie_model.g.dart';
 @freezed
 class MovieModel with _$MovieModel {
   factory MovieModel({
-    required int page,
     required List<Results> results,
   }) = _MovieModel;
 

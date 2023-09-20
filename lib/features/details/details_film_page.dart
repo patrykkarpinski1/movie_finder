@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/app/injection_container.dart';
 import 'package:movie_finder/features/details/cubit/details_cubit.dart';
+import 'package:movie_finder/features/home/pages/favorite/cubit/favorite_cubit.dart';
 import 'package:movie_finder/models/details/details_film_model.dart';
 import 'package:movie_finder/widgets/details/details_film_widget.dart';
 
@@ -13,8 +14,15 @@ class DetailsFilmPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<DetailsCubit>(
-      create: (context) => getIt()..getDetailsFilm(id),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<DetailsCubit>(
+          create: (context) => getIt()..getDetailsFilm(id),
+        ),
+        BlocProvider<FavoriteCubit>(
+          create: (context) => getIt()..getFavorites(),
+        ),
+      ],
       child: BlocConsumer<DetailsCubit, DetailsState>(
         listener: (context, state) {
           if (state.status == Status.error) {
@@ -52,13 +60,42 @@ class DetailsFilmPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.favorite_border,
-                          size: 36,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {},
+                      BlocConsumer<FavoriteCubit, FavoriteState>(
+                        listener: (context, state) {
+                          if (state.hasChanged == true) {
+                            if (state.favoriteStatus?[id] == true) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Added to favourites!'),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Removed to favourites!'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        builder: (context, state) {
+                          final isFavorite = state.favoriteStatus?[id] ?? false;
+                          return IconButton(
+                            icon: Icon(
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              size: 36,
+                              color: isFavorite ? Colors.red : Colors.white,
+                            ),
+                            onPressed: () {
+                              final cubit = context.read<FavoriteCubit>();
+                              cubit.addFavorite("movie", id, !isFavorite);
+                            },
+                          );
+                        },
                       ),
                       IconButton(
                         icon: const Icon(

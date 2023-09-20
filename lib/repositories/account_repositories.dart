@@ -1,4 +1,5 @@
 import 'package:movie_finder/data/account_data_source.dart';
+import 'package:movie_finder/models/account/account_movie_model.dart';
 import 'package:movie_finder/models/account/auth_model.dart';
 
 class AccountRepository {
@@ -34,5 +35,20 @@ class AccountRepository {
 
   Future<AuthModel?> deleteSession(String sessionId) async {
     return accountDataSource.deleteSession({"session_id": sessionId});
+  }
+
+  Future<AuthModel?> getAccountDetails(String sessionId) async {
+    return accountDataSource.getAccountDetails(sessionId);
+  }
+
+  Future<AccountMovieModel?> addFavorite(int accountId, String sessionId,
+      String mediaType, int mediaId, bool isFavorite) async {
+    return accountDataSource.addFavorite(accountId, sessionId,
+        {"media_type": mediaType, "media_id": mediaId, "favorite": isFavorite});
+  }
+
+  Future<AccountMovieModel?> getFavorites(
+      int accountId, String sessionId) async {
+    return accountDataSource.getFavorites(accountId, sessionId);
   }
 }

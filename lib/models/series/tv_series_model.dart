@@ -5,7 +5,6 @@ part 'tv_series_model.g.dart';
 @freezed
 class TvSeriesModel with _$TvSeriesModel {
   factory TvSeriesModel({
-    required int page,
     required List<Results> results,
   }) = _TvSeriesModel;
 
