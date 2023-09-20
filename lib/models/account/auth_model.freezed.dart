@@ -22,6 +22,7 @@ AuthModel _$AuthModelFromJson(Map<String, dynamic> json) {
 mixin _$AuthModel {
   String? get sessionId => throw _privateConstructorUsedError;
   String? get requestToken => throw _privateConstructorUsedError;
+  @JsonKey(name: 'id')
   int? get accountId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +36,10 @@ abstract class $AuthModelCopyWith<$Res> {
   factory $AuthModelCopyWith(AuthModel value, $Res Function(AuthModel) then) =
       _$AuthModelCopyWithImpl<$Res, AuthModel>;
   @useResult
-  $Res call({String? sessionId, String? requestToken, int? accountId});
+  $Res call(
+      {String? sessionId,
+      String? requestToken,
+      @JsonKey(name: 'id') int? accountId});
 }
 
 /// @nodoc
@@ -79,7 +83,10 @@ abstract class _$$_AuthModelCopyWith<$Res> implements $AuthModelCopyWith<$Res> {
       __$$_AuthModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? sessionId, String? requestToken, int? accountId});
+  $Res call(
+      {String? sessionId,
+      String? requestToken,
+      @JsonKey(name: 'id') int? accountId});
 }
 
 /// @nodoc
@@ -117,7 +124,8 @@ class __$$_AuthModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_AuthModel implements _AuthModel {
-  _$_AuthModel({this.sessionId, this.requestToken, this.accountId});
+  _$_AuthModel(
+      {this.sessionId, this.requestToken, @JsonKey(name: 'id') this.accountId});
 
   factory _$_AuthModel.fromJson(Map<String, dynamic> json) =>
       _$$_AuthModelFromJson(json);
@@ -127,6 +135,7 @@ class _$_AuthModel implements _AuthModel {
   @override
   final String? requestToken;
   @override
+  @JsonKey(name: 'id')
   final int? accountId;
 
   @override
@@ -170,7 +179,7 @@ abstract class _AuthModel implements AuthModel {
   factory _AuthModel(
       {final String? sessionId,
       final String? requestToken,
-      final int? accountId}) = _$_AuthModel;
+      @JsonKey(name: 'id') final int? accountId}) = _$_AuthModel;
 
   factory _AuthModel.fromJson(Map<String, dynamic> json) =
       _$_AuthModel.fromJson;
@@ -180,6 +189,7 @@ abstract class _AuthModel implements AuthModel {
   @override
   String? get requestToken;
   @override
+  @JsonKey(name: 'id')
   int? get accountId;
   @override
   @JsonKey(ignore: true)

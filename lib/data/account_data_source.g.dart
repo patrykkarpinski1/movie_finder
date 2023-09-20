@@ -137,7 +137,7 @@ class _AccountRemoteRetrofitDataSource
   }
 
   @override
-  Future<AccountMovieModel> addFavorite(
+  Future<AccountMovieModel> addFavoriteMovie(
     int accountId,
     String sessionId,
     Map<String, dynamic> favoriteData,
@@ -165,7 +165,7 @@ class _AccountRemoteRetrofitDataSource
   }
 
   @override
-  Future<AccountMovieModel> getFavorites(
+  Future<AccountMovieModel> getFavoritesMovies(
     int accountId,
     String sessionId,
   ) async {
@@ -182,6 +182,60 @@ class _AccountRemoteRetrofitDataSource
             .compose(
               _dio.options,
               'account/${accountId}/favorite/movies',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AccountMovieModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AccountMovieModel> addToWatchlistMovie(
+    int accountId,
+    String sessionId,
+    Map<String, dynamic> watchlistData,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'session_id': sessionId};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(watchlistData);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AccountMovieModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'account/${accountId}/watchlist',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AccountMovieModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AccountMovieModel> getWatchlistMovies(
+    int accountId,
+    String sessionId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'session_id': sessionId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AccountMovieModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'account/${accountId}/watchlist/movies',
               queryParameters: queryParameters,
               data: _data,
             )

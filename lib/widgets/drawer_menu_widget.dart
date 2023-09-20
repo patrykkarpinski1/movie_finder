@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/auth/auth_page.dart';
 import 'package:movie_finder/auth/cubit/auth_cubit.dart';
 import 'package:movie_finder/features/home/pages/favorite/favorite_page.dart';
+import 'package:movie_finder/features/home/pages/watchlist/watchlist_page.dart';
 
 class DrawerMenuWidget extends StatelessWidget {
   const DrawerMenuWidget({
@@ -46,7 +47,12 @@ class DrawerMenuWidget extends StatelessWidget {
                     MaterialPageRoute(builder: (_) => const FavoritePage()));
               }),
           _buildMenuItem(
-              icon: Icons.playlist_add, text: 'WATCHLIST', onTap: () {}),
+              icon: Icons.playlist_add,
+              text: 'WATCHLIST',
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const WatchlistPage()));
+              }),
           _buildMenuItem(icon: Icons.star_border, text: 'RATED', onTap: () {}),
           _buildMenuItem(
               icon: Icons.logout,

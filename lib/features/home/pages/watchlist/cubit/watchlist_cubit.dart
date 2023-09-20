@@ -5,13 +5,12 @@ import 'package:movie_finder/models/account/account_movie_model.dart';
 import 'package:movie_finder/repositories/account_repositories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-part 'favorite_state.dart';
-part 'favorite_cubit.freezed.dart';
+part 'watchlist_state.dart';
+part 'watchlist_cubit.freezed.dart';
 
-class FavoriteCubit extends Cubit<FavoriteState> {
-  Map<int, bool> favoriteStatus = {};
-
-  FavoriteCubit(this.accountRepository) : super(const FavoriteState());
+class WatchlistCubit extends Cubit<WatchlistState> {
+  Map<int, bool> watchlistStatus = {};
+  WatchlistCubit(this.accountRepository) : super(const WatchlistState());
   final AccountRepository accountRepository;
 
   Future<String?> _getSessionIdFromPrefs() async {
@@ -24,26 +23,23 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     return prefs.getInt('accountId');
   }
 
-  Future<void> addFavoriteMovie(
-    String mediaType,
-    int mediaId,
-    bool isFavorite,
-  ) async {
+  Future<void> addToWatchlistMovie(
+      String mediaType, int mediaId, bool isWatchlist) async {
     final sessionId = await _getSessionIdFromPrefs();
     final accountId = await _getAccountIdFromPrefs();
 
     if (sessionId != null && accountId != null) {
-      await accountRepository.addFavoriteMovie(
-          accountId, sessionId, mediaType, mediaId, isFavorite);
+      await accountRepository.addToWatchlistMovie(
+          accountId, sessionId, mediaType, mediaId, isWatchlist);
 
-      favoriteStatus[mediaId] = isFavorite;
-      emit(state.copyWith(favoriteStatus: favoriteStatus, hasChanged: true));
+      watchlistStatus[mediaId] = isWatchlist;
+      emit(state.copyWith(watchlistStatus: watchlistStatus, hasChanged: true));
       emit(state.copyWith(hasChanged: false));
     }
   }
 
-  Future<void> getFavoritesMovies() async {
-    emit(const FavoriteState(status: Status.loading));
+  Future<void> getWatchlistMovies() async {
+    emit(const WatchlistState(status: Status.loading));
     final sessionId = await _getSessionIdFromPrefs();
     final accountId = await _getAccountIdFromPrefs();
 
@@ -52,19 +48,19 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     }
 
     try {
-      final favoritesMovies =
-          await accountRepository.getFavoritesMovies(accountId, sessionId);
+      final watchlistMovies =
+          await accountRepository.getWatchlistMovies(accountId, sessionId);
 
-      if (favoritesMovies != null && favoritesMovies.results != null) {
-        for (var movie in favoritesMovies.results!) {
-          favoriteStatus[movie.id] = true;
+      if (watchlistMovies != null && watchlistMovies.results != null) {
+        for (var movie in watchlistMovies.results!) {
+          watchlistStatus[movie.id] = true;
         }
       }
 
       emit(state.copyWith(
           status: Status.success,
-          movies: favoritesMovies,
-          favoriteStatus: favoriteStatus));
+          movies: watchlistMovies,
+          watchlistStatus: watchlistStatus));
     } catch (error) {
       emit(
           state.copyWith(status: Status.error, errorMessage: error.toString()));

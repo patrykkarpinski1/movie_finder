@@ -41,14 +41,28 @@ class AccountRepository {
     return accountDataSource.getAccountDetails(sessionId);
   }
 
-  Future<AccountMovieModel?> addFavorite(int accountId, String sessionId,
+  Future<AccountMovieModel?> addFavoriteMovie(int accountId, String sessionId,
       String mediaType, int mediaId, bool isFavorite) async {
-    return accountDataSource.addFavorite(accountId, sessionId,
+    return accountDataSource.addFavoriteMovie(accountId, sessionId,
         {"media_type": mediaType, "media_id": mediaId, "favorite": isFavorite});
   }
 
-  Future<AccountMovieModel?> getFavorites(
+  Future<AccountMovieModel?> getFavoritesMovies(
       int accountId, String sessionId) async {
-    return accountDataSource.getFavorites(accountId, sessionId);
+    return accountDataSource.getFavoritesMovies(accountId, sessionId);
+  }
+
+  Future<AccountMovieModel?> addToWatchlistMovie(int accountId,
+      String sessionId, String mediaType, int mediaId, bool isWatchlist) async {
+    return accountDataSource.addToWatchlistMovie(accountId, sessionId, {
+      "media_type": mediaType,
+      "media_id": mediaId,
+      "watchlist": isWatchlist
+    });
+  }
+
+  Future<AccountMovieModel?> getWatchlistMovies(
+      int accountId, String sessionId) async {
+    return accountDataSource.getWatchlistMovies(accountId, sessionId);
   }
 }

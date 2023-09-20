@@ -30,12 +30,22 @@ abstract class AccountRemoteRetrofitDataSource {
   Future<AuthModel> getAccountDetails(@Query('session_id') String sessionId);
 
   @POST('account/{accountId}/favorite')
-  Future<AccountMovieModel> addFavorite(
+  Future<AccountMovieModel> addFavoriteMovie(
       @Path('accountId') int accountId,
       @Query('session_id') String sessionId,
       @Body() Map<String, dynamic> favoriteData);
 
   @GET('account/{accountId}/favorite/movies')
-  Future<AccountMovieModel> getFavorites(
+  Future<AccountMovieModel> getFavoritesMovies(
+      @Path('accountId') int accountId, @Query('session_id') String sessionId);
+
+  @POST('account/{accountId}/watchlist')
+  Future<AccountMovieModel> addToWatchlistMovie(
+      @Path('accountId') int accountId,
+      @Query('session_id') String sessionId,
+      @Body() Map<String, dynamic> watchlistData);
+
+  @GET('account/{accountId}/watchlist/movies')
+  Future<AccountMovieModel> getWatchlistMovies(
       @Path('accountId') int accountId, @Query('session_id') String sessionId);
 }

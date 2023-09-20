@@ -7,7 +7,7 @@ class AuthModel with _$AuthModel {
   factory AuthModel({
     String? sessionId,
     String? requestToken,
-    int? accountId,
+    @JsonKey(name: 'id') int? accountId,
   }) = _AuthModel;
 
   factory AuthModel.fromJson(Map<String, dynamic> json) =>
