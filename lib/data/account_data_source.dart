@@ -69,4 +69,14 @@ abstract class AccountRemoteRetrofitDataSource {
   @GET('account/{accountId}/watchlist/tv')
   Future<TvSeriesModel> getWatchlistSeries(
       @Path('accountId') int accountId, @Query('session_id') String sessionId);
+
+  @POST('movie/{movie_id}/rating')
+  Future<MovieModel> addRatingMovie(
+      @Path('movie_id') int movieId,
+      @Query('session_id') String sessionId,
+      @Body() Map<String, double> rating);
+
+  @GET('account/{account_id}/rated/movies')
+  Future<MovieModel> getRatingMovie(
+      @Path('accountId') int accountId, @Query('session_id') String sessionId);
 }

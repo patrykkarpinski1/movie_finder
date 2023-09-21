@@ -13,19 +13,8 @@ class DetailsFilmModel with _$DetailsFilmModel {
     double? voteAverage,
     int? runtime,
     String? releaseDate,
-    List<Genres>? genres,
   }) = _DetailsFilmModel;
 
   factory DetailsFilmModel.fromJson(Map<String, dynamic> json) =>
       _$DetailsFilmModelFromJson(json);
-}
-
-@freezed
-class Genres with _$Genres {
-  factory Genres({
-    required int id,
-    String? name,
-  }) = _Genres;
-
-  factory Genres.fromJson(Map<String, dynamic> json) => _$GenresFromJson(json);
 }

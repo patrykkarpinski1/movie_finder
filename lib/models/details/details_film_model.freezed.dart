@@ -28,7 +28,6 @@ mixin _$DetailsFilmModel {
   double? get voteAverage => throw _privateConstructorUsedError;
   int? get runtime => throw _privateConstructorUsedError;
   String? get releaseDate => throw _privateConstructorUsedError;
-  List<Genres>? get genres => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,8 +49,7 @@ abstract class $DetailsFilmModelCopyWith<$Res> {
       int? voteCount,
       double? voteAverage,
       int? runtime,
-      String? releaseDate,
-      List<Genres>? genres});
+      String? releaseDate});
 }
 
 /// @nodoc
@@ -75,7 +73,6 @@ class _$DetailsFilmModelCopyWithImpl<$Res, $Val extends DetailsFilmModel>
     Object? voteAverage = freezed,
     Object? runtime = freezed,
     Object? releaseDate = freezed,
-    Object? genres = freezed,
   }) {
     return _then(_value.copyWith(
       posterPath: freezed == posterPath
@@ -110,10 +107,6 @@ class _$DetailsFilmModelCopyWithImpl<$Res, $Val extends DetailsFilmModel>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      genres: freezed == genres
-          ? _value.genres
-          : genres // ignore: cast_nullable_to_non_nullable
-              as List<Genres>?,
     ) as $Val);
   }
 }
@@ -134,8 +127,7 @@ abstract class _$$_DetailsFilmModelCopyWith<$Res>
       int? voteCount,
       double? voteAverage,
       int? runtime,
-      String? releaseDate,
-      List<Genres>? genres});
+      String? releaseDate});
 }
 
 /// @nodoc
@@ -157,7 +149,6 @@ class __$$_DetailsFilmModelCopyWithImpl<$Res>
     Object? voteAverage = freezed,
     Object? runtime = freezed,
     Object? releaseDate = freezed,
-    Object? genres = freezed,
   }) {
     return _then(_$_DetailsFilmModel(
       posterPath: freezed == posterPath
@@ -192,10 +183,6 @@ class __$$_DetailsFilmModelCopyWithImpl<$Res>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      genres: freezed == genres
-          ? _value._genres
-          : genres // ignore: cast_nullable_to_non_nullable
-              as List<Genres>?,
     ));
   }
 }
@@ -211,9 +198,7 @@ class _$_DetailsFilmModel implements _DetailsFilmModel {
       this.voteCount,
       this.voteAverage,
       this.runtime,
-      this.releaseDate,
-      final List<Genres>? genres})
-      : _genres = genres;
+      this.releaseDate});
 
   factory _$_DetailsFilmModel.fromJson(Map<String, dynamic> json) =>
       _$$_DetailsFilmModelFromJson(json);
@@ -234,19 +219,10 @@ class _$_DetailsFilmModel implements _DetailsFilmModel {
   final int? runtime;
   @override
   final String? releaseDate;
-  final List<Genres>? _genres;
-  @override
-  List<Genres>? get genres {
-    final value = _genres;
-    if (value == null) return null;
-    if (_genres is EqualUnmodifiableListView) return _genres;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @override
   String toString() {
-    return 'DetailsFilmModel(posterPath: $posterPath, title: $title, id: $id, overview: $overview, voteCount: $voteCount, voteAverage: $voteAverage, runtime: $runtime, releaseDate: $releaseDate, genres: $genres)';
+    return 'DetailsFilmModel(posterPath: $posterPath, title: $title, id: $id, overview: $overview, voteCount: $voteCount, voteAverage: $voteAverage, runtime: $runtime, releaseDate: $releaseDate)';
   }
 
   @override
@@ -266,23 +242,13 @@ class _$_DetailsFilmModel implements _DetailsFilmModel {
                 other.voteAverage == voteAverage) &&
             (identical(other.runtime, runtime) || other.runtime == runtime) &&
             (identical(other.releaseDate, releaseDate) ||
-                other.releaseDate == releaseDate) &&
-            const DeepCollectionEquality().equals(other._genres, _genres));
+                other.releaseDate == releaseDate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      posterPath,
-      title,
-      id,
-      overview,
-      voteCount,
-      voteAverage,
-      runtime,
-      releaseDate,
-      const DeepCollectionEquality().hash(_genres));
+  int get hashCode => Object.hash(runtimeType, posterPath, title, id, overview,
+      voteCount, voteAverage, runtime, releaseDate);
 
   @JsonKey(ignore: true)
   @override
@@ -307,8 +273,7 @@ abstract class _DetailsFilmModel implements DetailsFilmModel {
       final int? voteCount,
       final double? voteAverage,
       final int? runtime,
-      final String? releaseDate,
-      final List<Genres>? genres}) = _$_DetailsFilmModel;
+      final String? releaseDate}) = _$_DetailsFilmModel;
 
   factory _DetailsFilmModel.fromJson(Map<String, dynamic> json) =
       _$_DetailsFilmModel.fromJson;
@@ -330,155 +295,7 @@ abstract class _DetailsFilmModel implements DetailsFilmModel {
   @override
   String? get releaseDate;
   @override
-  List<Genres>? get genres;
-  @override
   @JsonKey(ignore: true)
   _$$_DetailsFilmModelCopyWith<_$_DetailsFilmModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Genres _$GenresFromJson(Map<String, dynamic> json) {
-  return _Genres.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Genres {
-  int get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $GenresCopyWith<Genres> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GenresCopyWith<$Res> {
-  factory $GenresCopyWith(Genres value, $Res Function(Genres) then) =
-      _$GenresCopyWithImpl<$Res, Genres>;
-  @useResult
-  $Res call({int id, String? name});
-}
-
-/// @nodoc
-class _$GenresCopyWithImpl<$Res, $Val extends Genres>
-    implements $GenresCopyWith<$Res> {
-  _$GenresCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_GenresCopyWith<$Res> implements $GenresCopyWith<$Res> {
-  factory _$$_GenresCopyWith(_$_Genres value, $Res Function(_$_Genres) then) =
-      __$$_GenresCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int id, String? name});
-}
-
-/// @nodoc
-class __$$_GenresCopyWithImpl<$Res>
-    extends _$GenresCopyWithImpl<$Res, _$_Genres>
-    implements _$$_GenresCopyWith<$Res> {
-  __$$_GenresCopyWithImpl(_$_Genres _value, $Res Function(_$_Genres) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = freezed,
-  }) {
-    return _then(_$_Genres(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Genres implements _Genres {
-  _$_Genres({required this.id, this.name});
-
-  factory _$_Genres.fromJson(Map<String, dynamic> json) =>
-      _$$_GenresFromJson(json);
-
-  @override
-  final int id;
-  @override
-  final String? name;
-
-  @override
-  String toString() {
-    return 'Genres(id: $id, name: $name)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Genres &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_GenresCopyWith<_$_Genres> get copyWith =>
-      __$$_GenresCopyWithImpl<_$_Genres>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_GenresToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Genres implements Genres {
-  factory _Genres({required final int id, final String? name}) = _$_Genres;
-
-  factory _Genres.fromJson(Map<String, dynamic> json) = _$_Genres.fromJson;
-
-  @override
-  int get id;
-  @override
-  String? get name;
-  @override
-  @JsonKey(ignore: true)
-  _$$_GenresCopyWith<_$_Genres> get copyWith =>
       throw _privateConstructorUsedError;
 }

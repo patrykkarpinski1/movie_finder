@@ -4,27 +4,47 @@ import 'package:movie_finder/app/core/enums.dart';
 import 'package:movie_finder/app/injection_container.dart';
 import 'package:movie_finder/features/details/cubit/details_cubit.dart';
 import 'package:movie_finder/features/home/pages/favorite/cubit/favorite_cubit.dart';
+import 'package:movie_finder/features/home/pages/rating/cubit/rating_cubit.dart';
 import 'package:movie_finder/features/home/pages/watchlist/cubit/watchlist_cubit.dart';
 import 'package:movie_finder/models/details/details_film_model.dart';
+import 'package:movie_finder/widgets/details/add_favorite_film_widget.dart';
+import 'package:movie_finder/widgets/details/add_to_watchlist_film_widget.dart';
 import 'package:movie_finder/widgets/details/details_film_widget.dart';
+import 'package:movie_finder/widgets/details/rating_widget.dart';
 
-class DetailsFilmPage extends StatelessWidget {
+class DetailsFilmPage extends StatefulWidget {
   const DetailsFilmPage({required this.id, this.filmModel, super.key});
   final int id;
   final DetailsFilmModel? filmModel;
+
+  @override
+  State<DetailsFilmPage> createState() => _DetailsFilmPageState();
+}
+
+class _DetailsFilmPageState extends State<DetailsFilmPage> {
+  bool _isRatingVisible = false;
+
+  void _toggleRatingVisibility() {
+    setState(() {
+      _isRatingVisible = !_isRatingVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<DetailsCubit>(
-          create: (context) => getIt()..getDetailsFilm(id),
+          create: (context) => getIt()..getDetailsFilm(widget.id),
         ),
         BlocProvider<FavoriteCubit>(
           create: (context) => getIt()..getFavoritesMovies(),
         ),
         BlocProvider<WatchlistCubit>(
           create: (context) => getIt()..getWatchlistMovies(),
+        ),
+        BlocProvider<RatingCubit>(
+          create: (context) => getIt(),
         ),
       ],
       child: BlocConsumer<DetailsCubit, DetailsState>(
@@ -59,97 +79,43 @@ class DetailsFilmPage extends StatelessWidget {
             final filmModel = state.film!;
             return Scaffold(
                 backgroundColor: Colors.white,
-                bottomNavigationBar: BottomAppBar(
-                  color: Colors.black,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      BlocConsumer<FavoriteCubit, FavoriteState>(
-                        listener: (context, state) {
-                          if (state.hasChanged == true) {
-                            if (state.favoriteStatus?[id] == true) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Added to favourites!'),
-                                  backgroundColor: Colors.green,
-                                ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Removed to favourites!'),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
-                            }
-                          }
+                bottomNavigationBar: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (_isRatingVisible)
+                      RatingWidget(
+                        onRatingSubmitted: (rating) {
+                          final ratingCubit = context.read<RatingCubit>();
+                          ratingCubit.addRatingMovie(widget.id, rating);
+                          _toggleRatingVisibility();
                         },
-                        builder: (context, state) {
-                          final isFavorite = state.favoriteStatus?[id] ?? false;
-                          return IconButton(
-                            icon: Icon(
-                              isFavorite
-                                  ? Icons.favorite
-                                  : Icons.favorite_border,
+                        onRatingCanceled: () {
+                          _toggleRatingVisibility();
+                        },
+                      ),
+                    BottomAppBar(
+                      color: Colors.black,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          AddFavoriteFilmWidget(
+                            filmId: widget.id,
+                          ),
+                          AddToWatchlistFilmWidget(
+                            filmId: widget.id,
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.star_border,
                               size: 36,
-                              color: isFavorite ? Colors.red : Colors.white,
+                              color: Colors.white,
                             ),
-                            onPressed: () {
-                              final cubit = context.read<FavoriteCubit>();
-                              cubit.addFavoriteMovie("movie", id, !isFavorite);
-                            },
-                          );
-                        },
+                            onPressed: _toggleRatingVisibility,
+                          ),
+                        ],
                       ),
-                      BlocConsumer<WatchlistCubit, WatchlistState>(
-                        listener: (context, state) {
-                          if (state.hasChanged == true) {
-                            if (state.watchlistStatus?[id] == true) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Added to watchlist!'),
-                                  backgroundColor: Colors.green,
-                                ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Removed to watchlist!'),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
-                            }
-                          }
-                        },
-                        builder: (context, state) {
-                          final isWatchlist =
-                              state.watchlistStatus?[id] ?? false;
-                          return IconButton(
-                            icon: Icon(
-                              isWatchlist
-                                  ? Icons.playlist_add_check
-                                  : Icons.playlist_add,
-                              size: 36,
-                              color: isWatchlist ? Colors.yellow : Colors.white,
-                            ),
-                            onPressed: () {
-                              final cubit = context.read<WatchlistCubit>();
-                              cubit.addToWatchlistMovie(
-                                  "movie", id, !isWatchlist);
-                            },
-                          );
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.star_border,
-                          size: 36,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 appBar: AppBar(
                   leading: const Image(

@@ -91,4 +91,17 @@ class AccountRepository {
       int accountId, String sessionId) async {
     return accountDataSource.getWatchlistSeries(accountId, sessionId);
   }
+
+  Future<MovieModel?> addRatingMovie(
+    int movieId,
+    String sessionId,
+    double rating,
+  ) async {
+    return accountDataSource
+        .addRatingMovie(movieId, sessionId, {"value": rating});
+  }
+
+  Future<MovieModel?> getRatingMovie(int accountId, String sessionId) async {
+    return accountDataSource.getRatingMovie(accountId, sessionId);
+  }
 }
