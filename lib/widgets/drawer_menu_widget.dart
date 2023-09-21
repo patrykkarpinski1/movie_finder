@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_finder/auth/auth_page.dart';
 import 'package:movie_finder/auth/cubit/auth_cubit.dart';
 import 'package:movie_finder/features/home/pages/favorite/favorite_page.dart';
+import 'package:movie_finder/features/home/pages/rating/cubit/rating_cubit.dart';
 import 'package:movie_finder/features/home/pages/rating/rating_page.dart';
 import 'package:movie_finder/features/home/pages/watchlist/cubit/watchlist_cubit.dart';
 import 'package:movie_finder/features/home/pages/watchlist/watchlist_page.dart';
@@ -73,7 +74,11 @@ class DrawerMenuWidget extends StatelessWidget {
               text: 'RATED',
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const RatingPage(),
+                  builder: (_) => BlocProvider<RatingCubit>(
+                    create: (context) =>
+                        getIt<RatingCubit>()..getRating(MediaType.movie),
+                    child: const RatingPage(),
+                  ),
                 ));
               }),
           _buildMenuItem(

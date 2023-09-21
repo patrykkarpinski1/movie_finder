@@ -122,4 +122,12 @@ class RatingCubit extends Cubit<RatingState> {
           state.copyWith(status: Status.error, errorMessage: error.toString()));
     }
   }
+
+  Future<void> getRating(MediaType type) async {
+    if (type == MediaType.movie) {
+      getRatingMovie();
+    } else {
+      getRatingSeries();
+    }
+  }
 }

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:movie_finder/features/details/details_film_page.dart';
 import 'package:movie_finder/models/movie/movie_model.dart';
+import 'package:movie_finder/widgets/rating_circle_widget.dart';
 
 class MovieWidget extends StatelessWidget {
   const MovieWidget({
     super.key,
     required this.movieModel,
+    this.showRating = false,
   });
 
   final MovieModel movieModel;
-
+  final bool showRating;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -63,20 +65,31 @@ class MovieWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16.0),
-                        child: movie.backdropPath != null
-                            ? FadeInImage(
-                                placeholder:
-                                    const AssetImage('images/load.png'),
-                                image: NetworkImage(
-                                    'https://www.themoviedb.org/t/p/w500${movie.backdropPath}'),
-                                fit: BoxFit.cover,
-                              )
-                            : const Image(
-                                image: AssetImage('images/film.png'),
-                                fit: BoxFit.cover,
-                              ),
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(16.0),
+                            child: movie.backdropPath != null
+                                ? FadeInImage(
+                                    placeholder:
+                                        const AssetImage('images/load.png'),
+                                    image: NetworkImage(
+                                        'https://www.themoviedb.org/t/p/w500${movie.backdropPath}'),
+                                    fit: BoxFit.cover,
+                                  )
+                                : const Image(
+                                    image: AssetImage('images/film.png'),
+                                    fit: BoxFit.cover,
+                                  ),
+                          ),
+                          if (showRating)
+                            Positioned(
+                              right: 1.0,
+                              bottom: 1.0,
+                              child:
+                                  RatingCircleWidget(rating: movie.rating ?? 0),
+                            ),
+                        ],
                       ),
                     ),
                   ],
