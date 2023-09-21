@@ -44,7 +44,7 @@ class _DetailsFilmPageState extends State<DetailsFilmPage> {
           create: (context) => getIt()..getWatchlistMovies(),
         ),
         BlocProvider<RatingCubit>(
-          create: (context) => getIt(),
+          create: (context) => getIt()..getRatingMovie(),
         ),
       ],
       child: BlocConsumer<DetailsCubit, DetailsState>(
@@ -104,13 +104,40 @@ class _DetailsFilmPageState extends State<DetailsFilmPage> {
                           AddToWatchlistFilmWidget(
                             filmId: widget.id,
                           ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.star_border,
-                              size: 36,
-                              color: Colors.white,
-                            ),
-                            onPressed: _toggleRatingVisibility,
+                          BlocConsumer<RatingCubit, RatingState>(
+                            listener: (context, state) {
+                              if (state.status == Status.success &&
+                                  state.hasChanged == true) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Rating added!'),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
+                              } else if (state.status == Status.error) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                        state.errorMessage ?? 'Rating error'),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
+                            },
+                            builder: (context, state) {
+                              final hasRating =
+                                  state.ratingStatus?[widget.id] ?? false;
+
+                              return IconButton(
+                                icon: Icon(
+                                  hasRating ? Icons.star : Icons.star_border,
+                                  size: 36,
+                                  color:
+                                      hasRating ? Colors.yellow : Colors.white,
+                                ),
+                                onPressed: _toggleRatingVisibility,
+                              );
+                            },
                           ),
                         ],
                       ),

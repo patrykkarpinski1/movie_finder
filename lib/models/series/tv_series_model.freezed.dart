@@ -169,6 +169,7 @@ mixin _$Results {
   String? get backdropPath => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  double? get rating => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -180,7 +181,7 @@ abstract class $ResultsCopyWith<$Res> {
   factory $ResultsCopyWith(Results value, $Res Function(Results) then) =
       _$ResultsCopyWithImpl<$Res, Results>;
   @useResult
-  $Res call({String? backdropPath, String? name, int id});
+  $Res call({String? backdropPath, String? name, int id, double? rating});
 }
 
 /// @nodoc
@@ -199,6 +200,7 @@ class _$ResultsCopyWithImpl<$Res, $Val extends Results>
     Object? backdropPath = freezed,
     Object? name = freezed,
     Object? id = null,
+    Object? rating = freezed,
   }) {
     return _then(_value.copyWith(
       backdropPath: freezed == backdropPath
@@ -213,6 +215,10 @@ class _$ResultsCopyWithImpl<$Res, $Val extends Results>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -224,7 +230,7 @@ abstract class _$$_ResultsCopyWith<$Res> implements $ResultsCopyWith<$Res> {
       __$$_ResultsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? backdropPath, String? name, int id});
+  $Res call({String? backdropPath, String? name, int id, double? rating});
 }
 
 /// @nodoc
@@ -240,6 +246,7 @@ class __$$_ResultsCopyWithImpl<$Res>
     Object? backdropPath = freezed,
     Object? name = freezed,
     Object? id = null,
+    Object? rating = freezed,
   }) {
     return _then(_$_Results(
       backdropPath: freezed == backdropPath
@@ -254,6 +261,10 @@ class __$$_ResultsCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -261,7 +272,7 @@ class __$$_ResultsCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Results implements _Results {
-  _$_Results({this.backdropPath, this.name, required this.id});
+  _$_Results({this.backdropPath, this.name, required this.id, this.rating});
 
   factory _$_Results.fromJson(Map<String, dynamic> json) =>
       _$$_ResultsFromJson(json);
@@ -272,10 +283,12 @@ class _$_Results implements _Results {
   final String? name;
   @override
   final int id;
+  @override
+  final double? rating;
 
   @override
   String toString() {
-    return 'Results(backdropPath: $backdropPath, name: $name, id: $id)';
+    return 'Results(backdropPath: $backdropPath, name: $name, id: $id, rating: $rating)';
   }
 
   @override
@@ -286,12 +299,13 @@ class _$_Results implements _Results {
             (identical(other.backdropPath, backdropPath) ||
                 other.backdropPath == backdropPath) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.rating, rating) || other.rating == rating));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, backdropPath, name, id);
+  int get hashCode => Object.hash(runtimeType, backdropPath, name, id, rating);
 
   @JsonKey(ignore: true)
   @override
@@ -311,7 +325,8 @@ abstract class _Results implements Results {
   factory _Results(
       {final String? backdropPath,
       final String? name,
-      required final int id}) = _$_Results;
+      required final int id,
+      final double? rating}) = _$_Results;
 
   factory _Results.fromJson(Map<String, dynamic> json) = _$_Results.fromJson;
 
@@ -321,6 +336,8 @@ abstract class _Results implements Results {
   String? get name;
   @override
   int get id;
+  @override
+  double? get rating;
   @override
   @JsonKey(ignore: true)
   _$$_ResultsCopyWith<_$_Results> get copyWith =>

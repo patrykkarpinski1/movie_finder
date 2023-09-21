@@ -18,6 +18,7 @@ class Results with _$Results {
     String? backdropPath,
     String? name,
     required int id,
+    double? rating,
   }) = _Results;
 
   factory Results.fromJson(Map<String, dynamic> json) =>

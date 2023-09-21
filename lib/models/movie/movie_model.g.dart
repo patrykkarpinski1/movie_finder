@@ -27,6 +27,7 @@ _$_Results _$$_ResultsFromJson(Map<String, dynamic> json) => _$_Results(
       overview: json['overview'] as String?,
       voteCount: json['vote_count'] as int?,
       posterPath: json['poster_path'] as String?,
+      rating: (json['rating'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$_ResultsToJson(_$_Results instance) =>
@@ -39,4 +40,5 @@ Map<String, dynamic> _$$_ResultsToJson(_$_Results instance) =>
       'overview': instance.overview,
       'vote_count': instance.voteCount,
       'poster_path': instance.posterPath,
+      'rating': instance.rating,
     };

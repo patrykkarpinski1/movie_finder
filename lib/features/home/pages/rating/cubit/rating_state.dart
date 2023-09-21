@@ -6,5 +6,8 @@ class RatingState with _$RatingState {
     @Default(Status.initial) Status status,
     String? errorMessage,
     MovieModel? movies,
+    Map<int, bool>? ratingStatus,
+    bool? hasChanged,
+    TvSeriesModel? series,
   }) = _RatingState;
 }

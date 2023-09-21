@@ -19,6 +19,9 @@ mixin _$RatingState {
   Status get status => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
   MovieModel? get movies => throw _privateConstructorUsedError;
+  Map<int, bool>? get ratingStatus => throw _privateConstructorUsedError;
+  bool? get hasChanged => throw _privateConstructorUsedError;
+  TvSeriesModel? get series => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RatingStateCopyWith<RatingState> get copyWith =>
@@ -31,9 +34,16 @@ abstract class $RatingStateCopyWith<$Res> {
           RatingState value, $Res Function(RatingState) then) =
       _$RatingStateCopyWithImpl<$Res, RatingState>;
   @useResult
-  $Res call({Status status, String? errorMessage, MovieModel? movies});
+  $Res call(
+      {Status status,
+      String? errorMessage,
+      MovieModel? movies,
+      Map<int, bool>? ratingStatus,
+      bool? hasChanged,
+      TvSeriesModel? series});
 
   $MovieModelCopyWith<$Res>? get movies;
+  $TvSeriesModelCopyWith<$Res>? get series;
 }
 
 /// @nodoc
@@ -52,6 +62,9 @@ class _$RatingStateCopyWithImpl<$Res, $Val extends RatingState>
     Object? status = null,
     Object? errorMessage = freezed,
     Object? movies = freezed,
+    Object? ratingStatus = freezed,
+    Object? hasChanged = freezed,
+    Object? series = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -66,6 +79,18 @@ class _$RatingStateCopyWithImpl<$Res, $Val extends RatingState>
           ? _value.movies
           : movies // ignore: cast_nullable_to_non_nullable
               as MovieModel?,
+      ratingStatus: freezed == ratingStatus
+          ? _value.ratingStatus
+          : ratingStatus // ignore: cast_nullable_to_non_nullable
+              as Map<int, bool>?,
+      hasChanged: freezed == hasChanged
+          ? _value.hasChanged
+          : hasChanged // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      series: freezed == series
+          ? _value.series
+          : series // ignore: cast_nullable_to_non_nullable
+              as TvSeriesModel?,
     ) as $Val);
   }
 
@@ -80,6 +105,18 @@ class _$RatingStateCopyWithImpl<$Res, $Val extends RatingState>
       return _then(_value.copyWith(movies: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TvSeriesModelCopyWith<$Res>? get series {
+    if (_value.series == null) {
+      return null;
+    }
+
+    return $TvSeriesModelCopyWith<$Res>(_value.series!, (value) {
+      return _then(_value.copyWith(series: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -90,10 +127,18 @@ abstract class _$$_RatingStateCopyWith<$Res>
       __$$_RatingStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status status, String? errorMessage, MovieModel? movies});
+  $Res call(
+      {Status status,
+      String? errorMessage,
+      MovieModel? movies,
+      Map<int, bool>? ratingStatus,
+      bool? hasChanged,
+      TvSeriesModel? series});
 
   @override
   $MovieModelCopyWith<$Res>? get movies;
+  @override
+  $TvSeriesModelCopyWith<$Res>? get series;
 }
 
 /// @nodoc
@@ -110,6 +155,9 @@ class __$$_RatingStateCopyWithImpl<$Res>
     Object? status = null,
     Object? errorMessage = freezed,
     Object? movies = freezed,
+    Object? ratingStatus = freezed,
+    Object? hasChanged = freezed,
+    Object? series = freezed,
   }) {
     return _then(_$_RatingState(
       status: null == status
@@ -124,6 +172,18 @@ class __$$_RatingStateCopyWithImpl<$Res>
           ? _value.movies
           : movies // ignore: cast_nullable_to_non_nullable
               as MovieModel?,
+      ratingStatus: freezed == ratingStatus
+          ? _value._ratingStatus
+          : ratingStatus // ignore: cast_nullable_to_non_nullable
+              as Map<int, bool>?,
+      hasChanged: freezed == hasChanged
+          ? _value.hasChanged
+          : hasChanged // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      series: freezed == series
+          ? _value.series
+          : series // ignore: cast_nullable_to_non_nullable
+              as TvSeriesModel?,
     ));
   }
 }
@@ -132,7 +192,13 @@ class __$$_RatingStateCopyWithImpl<$Res>
 
 class _$_RatingState implements _RatingState {
   const _$_RatingState(
-      {this.status = Status.initial, this.errorMessage, this.movies});
+      {this.status = Status.initial,
+      this.errorMessage,
+      this.movies,
+      final Map<int, bool>? ratingStatus,
+      this.hasChanged,
+      this.series})
+      : _ratingStatus = ratingStatus;
 
   @override
   @JsonKey()
@@ -141,10 +207,24 @@ class _$_RatingState implements _RatingState {
   final String? errorMessage;
   @override
   final MovieModel? movies;
+  final Map<int, bool>? _ratingStatus;
+  @override
+  Map<int, bool>? get ratingStatus {
+    final value = _ratingStatus;
+    if (value == null) return null;
+    if (_ratingStatus is EqualUnmodifiableMapView) return _ratingStatus;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  @override
+  final bool? hasChanged;
+  @override
+  final TvSeriesModel? series;
 
   @override
   String toString() {
-    return 'RatingState(status: $status, errorMessage: $errorMessage, movies: $movies)';
+    return 'RatingState(status: $status, errorMessage: $errorMessage, movies: $movies, ratingStatus: $ratingStatus, hasChanged: $hasChanged, series: $series)';
   }
 
   @override
@@ -155,11 +235,17 @@ class _$_RatingState implements _RatingState {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            (identical(other.movies, movies) || other.movies == movies));
+            (identical(other.movies, movies) || other.movies == movies) &&
+            const DeepCollectionEquality()
+                .equals(other._ratingStatus, _ratingStatus) &&
+            (identical(other.hasChanged, hasChanged) ||
+                other.hasChanged == hasChanged) &&
+            (identical(other.series, series) || other.series == series));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, errorMessage, movies);
+  int get hashCode => Object.hash(runtimeType, status, errorMessage, movies,
+      const DeepCollectionEquality().hash(_ratingStatus), hasChanged, series);
 
   @JsonKey(ignore: true)
   @override
@@ -172,7 +258,10 @@ abstract class _RatingState implements RatingState {
   const factory _RatingState(
       {final Status status,
       final String? errorMessage,
-      final MovieModel? movies}) = _$_RatingState;
+      final MovieModel? movies,
+      final Map<int, bool>? ratingStatus,
+      final bool? hasChanged,
+      final TvSeriesModel? series}) = _$_RatingState;
 
   @override
   Status get status;
@@ -180,6 +269,12 @@ abstract class _RatingState implements RatingState {
   String? get errorMessage;
   @override
   MovieModel? get movies;
+  @override
+  Map<int, bool>? get ratingStatus;
+  @override
+  bool? get hasChanged;
+  @override
+  TvSeriesModel? get series;
   @override
   @JsonKey(ignore: true)
   _$$_RatingStateCopyWith<_$_RatingState> get copyWith =>

@@ -36,7 +36,12 @@ class RatingPage extends StatelessWidget {
                 itemCount: movieModel.results!.length,
                 itemBuilder: (context, index) {
                   final movie = movieModel.results![index];
-                  return ListTile(title: Text(movie.title ?? 'Unknown title'));
+                  return Row(
+                    children: [
+                      Text(movie.title ?? 'Unknown title'),
+                      Text(movie.rating.toString())
+                    ],
+                  );
                 },
               ),
             );

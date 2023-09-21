@@ -22,6 +22,7 @@ _$_Results _$$_ResultsFromJson(Map<String, dynamic> json) => _$_Results(
       backdropPath: json['backdrop_path'] as String?,
       name: json['name'] as String?,
       id: json['id'] as int,
+      rating: (json['rating'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$_ResultsToJson(_$_Results instance) =>
@@ -29,4 +30,5 @@ Map<String, dynamic> _$$_ResultsToJson(_$_Results instance) =>
       'backdrop_path': instance.backdropPath,
       'name': instance.name,
       'id': instance.id,
+      'rating': instance.rating,
     };
