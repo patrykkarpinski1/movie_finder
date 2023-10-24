@@ -65,6 +65,8 @@ dev_dependencies:
   injectable_generator: ^2.1.6
   json_serializable: ^6.6.1
   retrofit_generator: ^6.0.0+3
+  mocktail: ^1.0.1
+  bloc_test: ^9.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
