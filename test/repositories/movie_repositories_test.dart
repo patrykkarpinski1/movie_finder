@@ -6,8 +6,8 @@ import 'package:movie_finder/models/details/details_series_model.dart';
 import 'package:movie_finder/models/search/search_model.dart';
 import 'package:movie_finder/repositories/movie_repositories.dart';
 
-import '../mock/mock_movie_model.dart';
-import '../mock/mock_tv_series_model.dart';
+import '../mock_models/mock_movie_model.dart';
+import '../mock_models/mock_tv_series_model.dart';
 
 class MockMovieDataSource extends Mock
     implements MovieRemoteRetrofitDataSource {}

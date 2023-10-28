@@ -4,8 +4,8 @@ import 'package:movie_finder/data/account_data_source.dart';
 import 'package:movie_finder/models/account/auth_model.dart';
 import 'package:movie_finder/repositories/account_repositories.dart';
 
-import '../mock/mock_movie_model.dart';
-import '../mock/mock_tv_series_model.dart';
+import '../mock_models/mock_movie_model.dart';
+import '../mock_models/mock_tv_series_model.dart';
 
 class MockAccountDataSource extends Mock
     implements AccountRemoteRetrofitDataSource {}
