@@ -86,12 +86,17 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     final accountId = await _getAccountIdFromPrefs();
 
     if (sessionId != null && accountId != null) {
-      await accountRepository.addFavoriteSeries(
-          accountId, sessionId, mediaType, mediaId, isFavorite);
+      try {
+        await accountRepository.addFavoriteSeries(
+            accountId, sessionId, mediaType, mediaId, isFavorite);
 
-      favoriteStatus[mediaId] = isFavorite;
-      emit(state.copyWith(favoriteStatus: favoriteStatus, hasChanged: true));
-      emit(state.copyWith(hasChanged: false));
+        favoriteStatus[mediaId] = isFavorite;
+        emit(state.copyWith(favoriteStatus: favoriteStatus, hasChanged: true));
+        emit(state.copyWith(hasChanged: false));
+      } catch (error) {
+        emit(state.copyWith(
+            status: Status.error, errorMessage: error.toString()));
+      }
     }
   }
 
