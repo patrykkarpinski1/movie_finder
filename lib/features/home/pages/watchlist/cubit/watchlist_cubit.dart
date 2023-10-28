@@ -30,12 +30,18 @@ class WatchlistCubit extends Cubit<WatchlistState> {
     final accountId = await _getAccountIdFromPrefs();
 
     if (sessionId != null && accountId != null) {
-      await accountRepository.addToWatchlistMovie(
-          accountId, sessionId, mediaType, mediaId, isWatchlist);
+      try {
+        await accountRepository.addToWatchlistMovie(
+            accountId, sessionId, mediaType, mediaId, isWatchlist);
 
-      watchlistStatus[mediaId] = isWatchlist;
-      emit(state.copyWith(watchlistStatus: watchlistStatus, hasChanged: true));
-      emit(state.copyWith(hasChanged: false));
+        watchlistStatus[mediaId] = isWatchlist;
+        emit(
+            state.copyWith(watchlistStatus: watchlistStatus, hasChanged: true));
+        emit(state.copyWith(hasChanged: false));
+      } catch (error) {
+        emit(state.copyWith(
+            status: Status.error, errorMessage: error.toString()));
+      }
     }
   }
 
@@ -74,12 +80,18 @@ class WatchlistCubit extends Cubit<WatchlistState> {
     final accountId = await _getAccountIdFromPrefs();
 
     if (sessionId != null && accountId != null) {
-      await accountRepository.addToWatchlistSeries(
-          accountId, sessionId, mediaType, mediaId, isWatchlist);
+      try {
+        await accountRepository.addToWatchlistSeries(
+            accountId, sessionId, mediaType, mediaId, isWatchlist);
 
-      watchlistStatus[mediaId] = isWatchlist;
-      emit(state.copyWith(watchlistStatus: watchlistStatus, hasChanged: true));
-      emit(state.copyWith(hasChanged: false));
+        watchlistStatus[mediaId] = isWatchlist;
+        emit(
+            state.copyWith(watchlistStatus: watchlistStatus, hasChanged: true));
+        emit(state.copyWith(hasChanged: false));
+      } catch (error) {
+        emit(state.copyWith(
+            status: Status.error, errorMessage: error.toString()));
+      }
     }
   }
 
