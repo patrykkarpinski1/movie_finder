@@ -17,9 +17,6 @@ Search engine with a real-time filtering feature.
 API Communication:
 The app integrates with an external API using GET, POST, and DELETE methods.
 
-Project Status:
-The application is under development. Unit tests are planned, as well as improvements in functionality, API communication, and the app's appearance.
-
 ### Technologies used:
 - Dart
 - Flutter
@@ -33,6 +30,7 @@ The application is under development. Unit tests are planned, as well as improve
 - Shared preferences
 - Flutter_dotenv
 - Carousel_slider
+- Unit tests
 
 ### App preview
 #### Home
