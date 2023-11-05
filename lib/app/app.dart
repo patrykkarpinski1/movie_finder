@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_finder/app/core/config.dart';
 import 'package:movie_finder/auth/auth_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.black,
       ),
+      debugShowCheckedModeBanner: Config.debugShowCheckedModeBanner,
       home: AuthPage(),
     );
   }
